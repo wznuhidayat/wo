@@ -11,6 +11,11 @@
             <span>User</span>
           </a>
         </li>
+        <li>
+          <a href="<?= base_url().'vendor/index'; ?>">
+            <i class="fa fa-user"></i> <span>vendor</span>
+          </a>
+        </li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-cubes"></i>

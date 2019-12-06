@@ -1,51 +1,73 @@
 <?php 
 
-
 class Vendor extends CI_Controller{
-	public function index(){
-		check_not_login();
-		$data['vendor'] = $this->m_vendor->display_data()->result();
-		
-		$this->template->load('template','vendor',$data);
-	}
-	public function add_action(){
-		$id = rand(00000000,99999999);		
-		$vendor_list = $this->db->query("SELECT * FROM vendor");
-		while ($user = $vendor_list->result_array())
-		{
-		    if ($id == $user['id_vendor'])
-		    {
-		        echo('Already exist.');
-		    }
-		    else
-		    {
-		        $vendorid = $id;
-		        break;
-		    }
-		}
-		
-		
-		$owner = $this->input->post('owner');
-		$email = $this->input->post('email');
-		$phone = $this->input->post('phone');
-		$address = $this->input->post('address');
-		$detail = $this->input->post('detail');
 
-		$data = array(
-			'id_vendor' => $vendorid,
-			'owner' => $owner,
-			'email' => $email,
-			'phone' => $phone,
-			'address' => $address,
-			'detail' => $detail,
-		);
+	public function __construct()
+    {
+        parent::__construct();
+        $this->load->model("m_vendor");
+        $this->load->library('form_validation');
+    }
 
-		$this->m_vendor->input_data($data,'vendor');
-		redirect('vendor/index');
-	}
-	public function delete($id){
-		$where = array('id_vendor' => $id);
-		$this->m_vendor->delete_data($where, 'vendor');
-		redirect('vendor/index');
-	}
+    public function index()
+    {
+        $data["vendor"] = $this->m_vendor->getAll();
+        $this->template->load('template','vendor/vendor_view',$data);
+    }
+
+
+    public function add()
+    {
+        $vendor = $this->m_vendor;
+        $validation = $this->form_validation;
+        $validation->set_rules($vendor->rules_add());
+
+        if ($validation->run()) {
+            $vendor->save();
+            $this->session->set_flashdata('success', 'Berhasil disimpan');
+            redirect('vendor');
+        }
+
+        $this->template->load('template','vendor/add_vendor');
+    }
+
+    public function edit($id = null)
+    {
+        if (!isset($id)) redirect('vendor');
+       
+        $vendor = $this->m_vendor;
+        $validation = $this->form_validation;
+        $validation->set_rules($vendor->rules_edit());
+
+        if ($validation->run()) {
+            $vendor->update();
+            $this->session->set_flashdata('success', 'Berhasil disimpan');
+            redirect('vendor');
+        }
+
+        $data["vendor"] = $vendor->getById($id);
+        if (!$data["vendor"]) show_404();
+        
+        $this->template->load('template','vendor/edit_vendor',$data);
+    }
+
+    public function delete($id=null)
+    {
+        if (!isset($id)) show_404();
+        
+        if ($this->m_vendor->delete($id)) {
+            redirect(site_url('vendor'));
+        }
+    }
+    function email_check(){
+        $post = $this->input->post();
+        $query = $this->db->query("SELECT * FROM t_vendor WHERE email = '$post[email]' AND id_vendor != '$post[id]'");
+        if ($query->num_rows() > 0){
+                $this->form_validation->set_message('email_check', '{field} not allowed');
+                return FALSE;
+            }else{
+                return TRUE;
+                }
+    }
+
 }
