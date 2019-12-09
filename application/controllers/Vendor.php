@@ -5,13 +5,13 @@ class Vendor extends CI_Controller{
 	public function __construct()
     {
         parent::__construct();
-        $this->load->model("m_vendor");
+        $this->load->model('m_vendor');
         $this->load->library('form_validation');
     }
 
     public function index()
     {
-        $data["vendor"] = $this->m_vendor->getAll();
+        $data['vendor'] = $this->m_vendor->getAll();
         $this->template->load('template','vendor/vendor_view',$data);
     }
 
@@ -45,8 +45,8 @@ class Vendor extends CI_Controller{
             redirect('vendor');
         }
 
-        $data["vendor"] = $vendor->getById($id);
-        if (!$data["vendor"]) show_404();
+        $data['vendor'] = $vendor->getById($id);
+        if (!$data['vendor']) show_404();
         
         $this->template->load('template','vendor/edit_vendor',$data);
     }

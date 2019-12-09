@@ -11,7 +11,6 @@ class Sound extends CI_Controller {
         $this->load->library('form_validation');
     }
 	public function index(){
-		check_not_login();
 		
 		$data['sound'] = $this->m_sound->get();
 		$this->template->load('template','product/data_sound',$data);
