@@ -18,35 +18,38 @@
                 </div>
             </div>
             <div class="box-body table-responsive">
-                <table class="table table-bordered table-striped">
-                    
-                    <tr>
-                        <th>Kode tenda</th>
-                        <th>Name</th>
-                        <th>Vendor</th>
-                        <th>Price</th>
-                        <th>Detail</th>
-                        <th>img</th>
-                        <th>Option</th>
-                        
-                    </tr>
+                <table class="table table-bordered table-striped" id="table1">
+                    <thead>
+                        <tr>
+                            <th>Kode tenda</th>
+                            <th>Name</th>
+                            <th>Vendor</th>
+                            <th>Price</th>
+                            <th>Detail</th>
+                            <th>img</th>
+                            <th>Option</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
                     <?php 
                     foreach($tenda as $u => $data): ?>
-                    <tr>
-                        <td><?php echo $data->kode_tenda ?></td>
-                        <td><?php echo $data->name ?></td>
-                        <td><?php echo $data->vendor ?></td>
-                        <td><?php echo $data->price ?></td>
-                        <td><?php echo $data->detail ?></td>
-                        <td><?php echo $data->img ?></td>
-                        <td class="text-center">                    
-                                <a ><?php echo anchor('products/tenda/edit/'.$data->kode_tenda, '<div class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></div>') ?>
-                                </a>
-                                <a href="<?= site_url('products/tenda/delete/'.$data->kode_tenda) ?>" onclick="javascript: return confirm('are you sure to delete this data?')"  class="btn btn-xs btn-danger"  ><i class="fa fa-trash"></i></a>
+                        <tr>
+                            <td><?php echo $data->kode_tenda ?></td>
+                            <td><?php echo $data->name ?></td>
+                            <td><?php echo $data->vendor ?></td>
+                            <td><?php echo $data->price ?></td>
+                            <td><?php echo $data->detail ?></td>
+                            <td><?php echo $data->img ?></td>
+                            <td class="text-center">                    
+                                    <a ><?php echo anchor('products/tenda/edit/'.$data->kode_tenda, '<div class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></div>') ?>
+                                    </a>
+                                    <a href="<?= site_url('products/tenda/delete/'.$data->kode_tenda) ?>" onclick="javascript: return confirm('are you sure to delete this data?')"  class="btn btn-xs btn-danger"  ><i class="fa fa-trash"></i></a>
 
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
                     <?php endforeach; ?>
+                    </tbody>
                  </table>
             </div>  
         </div>

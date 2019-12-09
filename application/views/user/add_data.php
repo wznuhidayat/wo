@@ -12,7 +12,7 @@
             <div class="box-header">
                 <h3 class="box-title">Add User</h3>
                 <div class="pull-right">
-                	<a href="<?php echo site_url('user/add'); ?>" class="btn btn-warning btn-flat">
+                	<a href="<?php echo site_url('user'); ?>" class="btn btn-warning btn-flat">
                      <i class="fa fa-undo"> back</i>
                     </a>
                 </div>
@@ -46,6 +46,14 @@
                                 <label for="phone">Phone</label>
                                 <input type="text" class="form-control" value="<?=set_value('phone') ?>" id="phone" placeholder="phone" name="phone">
                                 <?= form_error('phone') ?>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <select name="gender" id="gender" class="form-control" required>
+                                    <option value="">- select -</option>
+                                    <option value="L">Male</option>
+                                    <option value="P">Female</option>
+                                </select>
                             </div>
                             <div class="form-group <?= form_error('address') ? 'has-error' : null ?>">
                                 <label for="address">Address</label>
