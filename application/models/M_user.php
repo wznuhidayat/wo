@@ -22,8 +22,8 @@ class M_user extends CI_Model{
 		$params['email'] = $post['email'];
 		$params['password'] = md5($post['password']);
 		$params['phone'] = $post['phone'];
+		$params['gender'] = $post['gender'];
 		$params['address'] = $post['address'];
-		$params['role'] = 1;
 		$this->db->insert('t_user',$params);
 	}
 	public function edit($post){
@@ -35,7 +35,7 @@ class M_user extends CI_Model{
 		
 		$params['phone'] = $post['phone'];
 		$params['address'] = $post['address'];
-		$params['role'] = 1;
+		$params['gender'] = $post['gender'];
 		$this->db->where('email',$post['email']);
 		$this->db->update('t_user',$params);
 	}
