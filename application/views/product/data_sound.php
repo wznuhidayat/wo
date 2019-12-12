@@ -31,13 +31,13 @@
                             
                         </tr>
                     </thead>
+                    <tbody>
                     <?php 
                     foreach($sound->result() as $u => $data): ?>
-                    <tbody>
                         <tr>
                             <td><?php echo $data->sound_id ?></td>
                             <td><?php echo $data->name ?></td>
-                            <td><?php echo $data->vendor ?></td>
+                            <td><?php echo $data->id_vendor ?></td>
                             <td><?php echo $data->price ?></td>
                             <td><?php echo $data->detail ?></td>
                             <td><?php echo $data->img ?></td>
@@ -52,8 +52,8 @@
                                
                             </td>
                         </tr>
-                    </tbody>
                     <?php endforeach; ?>
+                    </tbody>
                  </table>
             </div>	
         </div>

@@ -1,22 +1,22 @@
 <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="">
+        <li <?= $this->uri->segment(2) == 'dashboard' || $this->uri->segment(2) == '' ? 'class="active"' : '' ?>>
           <a href="<?= base_url().'admin/dashboard';?>">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
-        <li class="">
+        <li <?= $this->uri->segment(1) == 'user' ? 'class="active"' : '' ?>>
           <a href="<?= base_url().'user/index';?>">
             <i class="fa fa-users"></i>
             <span>User</span>
           </a>
         </li>
-        <li>
+        <li <?= $this->uri->segment(1) == 'vendor' ? 'class="active"' : '' ?>>
           <a href="<?= base_url().'vendor/index'; ?>">
-            <i class="fa fa-user"></i> <span>vendor</span>
+            <i class="fa fa-user"></i> <span>Vendor</span>
           </a>
         </li>
-        <li class="treeview">
+        <li class="treeview <?= $this->uri->segment(1) == 'products' ? 'active' : '' ?>">
           <a href="#">
             <i class="fa fa-cubes"></i>
             <span>Product</span>
@@ -25,8 +25,12 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?= base_url().'products/sound';?>"><i class="fa fa-volume-up"></i>Sound system</a></li>
-            <li><a href="<?= base_url().'products/tenda' ?>"><i class="glyphicon glyphicon-tent"></i>Tenda</a></li>
+            <li <?= $this->uri->segment(2) == 'sound' ? 'class="active"' : '' ?>>
+              <a href="<?= base_url().'products/sound';?>"><i class="fa fa-volume-up"></i>Sound system</a>
+            </li>
+            <li <?= $this->uri->segment(2) == 'tenda' ? 'class="active"' : '' ?>>
+              <a href="<?= base_url().'products/tenda' ?>"><i class="glyphicon glyphicon-tent"></i>Tenda</a>
+            </li>
             <li><a href="../layout/fixed.html"><i class="fa fa-magic"></i>Kuade</a></li>
             <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-camera-retro"></i>Photographer</a></li>
             <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-smile-o"></i>Makeup</a></li>

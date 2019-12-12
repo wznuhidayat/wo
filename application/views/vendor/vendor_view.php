@@ -26,7 +26,8 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
-                            <th>address</th>
+                            <th>Address</th>
+                            <th>Option</th>
                         </tr>
                     </thead>
                     <tbody>

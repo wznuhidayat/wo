@@ -19,7 +19,7 @@ class M_sound extends CI_Model{
 		$params = [
 			'sound_id' => $kode.floor(microtime(true) * 231),
 			'name' => $post['name'],
-			'vendor' => $post['vendor'],
+			'id_vendor' => $post['id_vendor'],
 			'price' => $post['price'],
 			'kategori' => $post['kategori'],
 			'detail' => $post['detail']
@@ -29,7 +29,7 @@ class M_sound extends CI_Model{
 	public function edit($post){
 		$params = [
 			'name' => $post['name'],
-			'vendor' => $post['vendor'],
+			'id_vendor' => $post['id_vendor'],
 			'price' => $post['price'],
 			'kategori' => $post['kategori'],
 			'detail' => $post['detail']

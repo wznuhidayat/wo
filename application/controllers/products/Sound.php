@@ -24,7 +24,7 @@ class Sound extends CI_Controller {
         $sound = new stdClass();
         $sound->sound_id = null;
         $sound->name = null;
-        $sound->vendor = null;
+        $sound->id_vendor = null;
         $sound->price = null;
         $sound->kategori = null;
         $sound->detail = null;

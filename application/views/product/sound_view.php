@@ -1,10 +1,10 @@
 <section class="content-header">
-    <h1>Products
-        <small>Sound System</small>
+    <h1><?= ucfirst($this->uri->segment(1)) ?>
+        <small><?= ucfirst($this->uri->segment(2)) ?></small>
     </h1>
     <ol class="breadcrumb">
         <li><a href=""><i class="fa fa-user"></i></a></li>
-        <li class="active">Sound Data</li>
+        <li class="active"><?= ucfirst($this->uri->segment(2)) ?> Data</li>
     </ol>
 </section>
 <section class="content">
@@ -27,8 +27,8 @@
                                 <input type="text" class="form-control" value="<?= $sound->name ?>" id="name" placeholder="name" name="name" required  >   
                             </div>
                             <div class="form-group">
-                                <label for="vendor">Vendor</label>
-                                <input type="text" class="form-control" value="<?= $sound->vendor ?>" id="vendor" placeholder="vendor" name="vendor" required  >   
+                                <label for="id_vendor">ID Vendor</label>
+                                <input type="text" class="form-control" value="<?= $sound->id_vendor ?>" id="id_vendor" placeholder="id vendor" name="id_vendor" required  >   
                             </div> 
                             <div class="form-group">
                                 <label for="price">Price</label>
@@ -44,7 +44,7 @@
                             </div>
                             <!-- div class="form-group">
                                 <label for="img">img</label>
-                                <input type="text" class="form-control" value="" id="img" placeholder="img" name="vendor" required  >   
+                                <input type="text" class="form-control" value="" id="img" placeholder="img" name="id_vendor" required  >   
                             </div> -->
                             
                             <div class="form-group ">
