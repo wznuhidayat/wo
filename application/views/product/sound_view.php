@@ -28,7 +28,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="id_vendor">ID Vendor</label>
-                                <input type="text" class="form-control" value="<?= $sound->id_vendor ?>" id="id_vendor" placeholder="id vendor" name="id_vendor" required  >   
+                                <?= form_dropdown('id_vendor', $vendor, $selected_vendor, ['class' => 'form-control' , 'required' => 'required']) ?>  
                             </div> 
                             <div class="form-group">
                                 <label for="price">Price</label>

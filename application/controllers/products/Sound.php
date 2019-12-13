@@ -7,7 +7,7 @@ class Sound extends CI_Controller {
         parent::__construct();
         check_not_login();
         $this->load->helper('url');
-        $this->load->model('m_sound');
+        $this->load->model(['m_sound','m_vendor']);
         $this->load->library('form_validation');
     }
 	public function index(){
@@ -16,8 +16,11 @@ class Sound extends CI_Controller {
 		$this->template->load('template','product/data_sound',$data);
 	}
 	public function del($id){
-        // $where = $this->input->post('sound_id');
         $this->m_sound->delete($id);
+        if($this->db->affected_rows() > 0){
+            echo "<script>alert('Data deleted');</script>";
+        }
+        
         redirect('products/sound');
     }
     public function add(){
@@ -29,9 +32,17 @@ class Sound extends CI_Controller {
         $sound->kategori = null;
         $sound->detail = null;
         $sound->img = null;
+
+        $query_vendor = $this->m_vendor->getall();
+        $vendor[null] = '- select -';
+        foreach ($query_vendor as $ven) {
+             $vendor[$ven->id_vendor] = $ven->id_vendor;
+         } 
         $data = array(
             'page' => 'add',
-            'sound' => $sound
+            'sound' => $sound,
+            'vendor' => $vendor,
+            'selected_vendor' => null
         );
         
         $this->template->load('template','product/sound_view',$data);
@@ -40,10 +51,18 @@ class Sound extends CI_Controller {
         $query = $this->m_sound->get($id);
         if ($query->num_rows() > 0){
             $sound = $query->row();
+            $query_vendor = $this->m_vendor->getall();
+            $vendor[null] = '- select -';
+            foreach ($query_vendor as $ven) {
+                 $vendor[$ven->id_vendor] = $ven->id_vendor;
+             } 
             $data = array(
                 'page' => 'edit',
-                'sound' => $sound
+                'sound' => $sound,
+                'vendor' => $vendor,
+                'selected_vendor' => $sound->id_vendor
             );
+            
             $this->template->load('template','product/sound_view',$data);
         }
     }
@@ -57,6 +76,6 @@ class Sound extends CI_Controller {
         if($this->db->affected_rows() > 0){
             echo "<script>alert('Data saved');</script>";
         }
-        echo "<script>window.location='".site_url('products/sound')."';</script>";
+        redirect('products/sound');
     }
 }
