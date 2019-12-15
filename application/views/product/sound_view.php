@@ -8,6 +8,7 @@
     </ol>
 </section>
 <section class="content">
+    
 	 <div class="box">
             <div class="box-header">
                 <h3 class="box-title"><?= ucfirst($page) ?> Data Sound</h3>

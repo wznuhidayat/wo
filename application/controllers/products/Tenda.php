@@ -24,7 +24,7 @@ class Tenda extends CI_Controller{
 
         if ($validation->run()) {
             $tenda->save();
-            $this->session->set_flashdata('success', 'Berhasil disimpan');
+            $this->session->set_flashdata('success', 'Data Successfully Added');
             redirect('products/tenda');
         }
 
@@ -41,7 +41,9 @@ class Tenda extends CI_Controller{
 
         if ($validation->run()) {
             $tenda->update();
-            $this->session->set_flashdata('success', 'Berhasil disimpan');
+            if($this->db->affected_rows() > 0){
+            $this->session->set_flashdata('success', 'Data Successfully Added');
+            }
             redirect('products/tenda');
         }
 
@@ -56,6 +58,9 @@ class Tenda extends CI_Controller{
         if (!isset($id)) show_404();
         
         if ($this->m_tenda->delete($id)) {
+            if($this->db->affected_rows() > 0){
+                $this->session->set_flashdata('deleted', 'Deleted Successfully');
+            }
             redirect(site_url('products/tenda'));
         }
     }

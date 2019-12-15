@@ -19,12 +19,12 @@ class Vendor extends CI_Controller{
     public function add()
     {
         $vendor = $this->m_vendor;
-        $validation = $this->form_validation;
+        $form_validationidation = $this->form_validation;
         $validation->set_rules($vendor->rules_add());
 
         if ($validation->run()) {
             $vendor->save();
-            $this->session->set_flashdata('success', 'Berhasil disimpan');
+            $this->session->set_flashdata('success', 'Data Successfully Added');
             redirect('vendor');
         }
 
@@ -41,7 +41,9 @@ class Vendor extends CI_Controller{
 
         if ($validation->run()) {
             $vendor->update();
-            $this->session->set_flashdata('success', 'Berhasil disimpan');
+            if($this->db->affected_rows() > 0){
+            $this->session->set_flashdata('success', 'Data Successfully Added');
+            }
             redirect('vendor');
         }
 
@@ -54,8 +56,10 @@ class Vendor extends CI_Controller{
     public function delete($id=null)
     {
         if (!isset($id)) show_404();
-        
         if ($this->m_vendor->delete($id)) {
+            if($this->db->affected_rows() > 0){
+                $this->session->set_flashdata('deleted', 'Deleted Successfully');
+            }
             redirect(site_url('vendor'));
         }
     }

@@ -18,10 +18,10 @@ class Sound extends CI_Controller {
 	public function del($id){
         $this->m_sound->delete($id);
         if($this->db->affected_rows() > 0){
-            echo "<script>alert('Data deleted');</script>";
+            $this->session->set_flashdata('deleted', 'Deleted Successfully');
         }
-        
         redirect('products/sound');
+        //redirect('products/sound');
     }
     public function add(){
         $sound = new stdClass();
@@ -74,7 +74,7 @@ class Sound extends CI_Controller {
             $this->m_sound->edit($post);
         }
         if($this->db->affected_rows() > 0){
-            echo "<script>alert('Data saved');</script>";
+            $this->session->set_flashdata('success', 'Data Successfully Added');
         }
         redirect('products/sound');
     }

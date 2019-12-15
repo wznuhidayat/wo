@@ -8,6 +8,8 @@
     </ol>
 </section>
 <section class="content">
+
+    <?php $this->load->view('messages') ?>
      <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Data Vendor</h3>

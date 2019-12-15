@@ -32,15 +32,18 @@ class User extends CI_Controller{
                     $post = $this->input->post(null, TRUE);
                     $this->m_user->add($post);
                     if($this->db->affected_rows() > 0){
-                        echo "<script>alert('save data success');</script>";
+                        $this->session->set_flashdata('success', 'Data Successfully Added');
                     }
-                    echo "<script>window.location='".site_url('user')."';</script>";
+                    redirect('user');
                 }
 		
 	}
     public function del(){
         $where = $this->input->post('email');
         $this->m_user->delete($where);
+        if($this->db->affected_rows() > 0){
+           $this->session->set_flashdata('deleted', 'deleted successfully');
+        }
         redirect('user/index');
     }
     public function edit($email){
@@ -65,8 +68,8 @@ class User extends CI_Controller{
                         $data['user'] = $query->row();
                         $this->template->load('template','user/edit_data',$data);
                     }else{
-                        echo "<script>alert('save data success');";
-                        echo "window.location='".site_url('user')."';</script>";
+                        $this->session->set_flashdata('success', 'Data Successfully Added');
+                        redirect('user');
                     }
                         
                 }
@@ -75,9 +78,9 @@ class User extends CI_Controller{
                     $post = $this->input->post(null, TRUE);
                     $this->m_user->edit($post);
                     if($this->db->affected_rows() > 0){
-                        echo "<script>alert('save data success');</script>";
+                       $this->session->set_flashdata('success', 'Data Successfully Added');
                     }
-                    echo "<script>window.location='".site_url('user')."';</script>";
+                    redirect('user');
                 }
         
     }

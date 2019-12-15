@@ -8,6 +8,7 @@
 	</ol>
 </section>
 <section class="content">
+    <?php $this->view('messages'); ?>
 	 <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Data User</h3>
