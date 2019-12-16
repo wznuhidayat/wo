@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 09, 2019 at 05:13 PM
+-- Generation Time: Dec 16, 2019 at 02:27 PM
 -- Server version: 5.7.28-0ubuntu0.18.04.4
 -- PHP Version: 7.3.11-1+ubuntu18.04.1+deb.sury.org+1
 
@@ -40,7 +40,6 @@ CREATE TABLE `p_tenda` (
 --
 
 INSERT INTO `p_tenda` (`kode_tenda`, `name`, `vendor`, `price`, `detail`, `img`) VALUES
-('TE009342034023', 'Tenda biru', 23480234, 2000, 'sadas', ''),
 ('TE363838674006', 'tenda ijo', 2132111, 2000000, 'dasda', 'default.jpg');
 
 -- --------------------------------------------------------
@@ -72,19 +71,12 @@ INSERT INTO `t_admin` (`username`, `name`, `password`, `img`) VALUES
 CREATE TABLE `t_sound` (
   `sound_id` varchar(12) NOT NULL,
   `name` varchar(30) NOT NULL,
-  `vendor` varchar(30) NOT NULL,
+  `id_vendor` int(8) NOT NULL,
   `price` varchar(20) NOT NULL,
   `kategori` varchar(20) NOT NULL,
   `detail` varchar(300) NOT NULL,
   `img` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `t_sound`
---
-
-INSERT INTO `t_sound` (`sound_id`, `name`, `vendor`, `price`, `kategori`, `detail`, `img`) VALUES
-('SO3637797704', 'med sound', 'oras', '2000001', 'medium', 'asdasdas', '');
 
 -- --------------------------------------------------------
 
@@ -107,12 +99,9 @@ CREATE TABLE `t_user` (
 --
 
 INSERT INTO `t_user` (`email`, `name`, `password`, `phone`, `gender`, `address`, `img`) VALUES
-('bumamik@gmail.com', 'bumamik', '9e3b7de96faf6ad9f345248ce289ffa0', '234234234234', 'P', 'sdsa', ''),
-('dewinafi@gmail.com', 'dewi nafi', '597d306e0737661104758b58a970a003', '123123232', 'P', 'Jember', ''),
-('ekopurwono@gmail.com', 'eko', '7bfcb1595534afb425cf034f23e2b312', '2147483647', 'L', 'Jakarta', ''),
-('gombyokfc@gmail.com', 'eko', 'c444de342b37faecf30313892503ff27', '234234234234', 'L', 'asdas', ''),
-('nextwznu@gmail.com', 'wisnu hidayat', 'cd556716c613c2b47bdad86f13a8bb36', '083144353355', 'L', 'asdass', ''),
-('tegarseptiano@gmail.com', 'tegar septiano', '1d31802d64bae29d88923d795fc73734', '812345678', 'L', 'tulungaggung', '');
+('ekoju@gmail.com', 'ekoju', '8a9a90935d5c9caa5f47e973dc22cbe5', '083144353354', 'L', 'palembang', ''),
+('intanmaulida@gmail.com', 'intan maulida', 'c079f23d612970847aa341df16793272', '032940230492', 'P', 'gresik', ''),
+('tegarseptiano@gmail.com', 'tegar septiano', 'bc44c7f00c1901c9e1214a7554e1d80e', '083144353354', 'L', 'wonogiri', '');
 
 -- --------------------------------------------------------
 
@@ -135,10 +124,9 @@ CREATE TABLE `t_vendor` (
 --
 
 INSERT INTO `t_vendor` (`id_vendor`, `name`, `email`, `password`, `phone`, `address`, `img`) VALUES
-(22976895, 'intan maulida', 'intanmaulida@gmail.com', '', '0812345678', 'gresik', ''),
-(56247184, 'wisnu art', 'nextwznu@gmail.com', '', '083144353355', 'tulung aggung', ''),
-(1575531021, 'tegar septiano', 'tegarseptiano@gmail.com', 'd41d8cd98f00b204e9800998ecf8427e', '23242343', 'asdsad', 'default.jpg'),
-(1575531077, 'tegarsuherman', 'tegarsuherman@gmail.com', 'd41d8cd98f00b204e9800998ecf8427e', '3242424', 'asdasd', 'default.jpg');
+(22976895, 'intan maulida', 'intanmaulida@gmail.com', 'd41d8cd98f00b204e9800998ecf8427e', '08123456781', 'gresik', 'default.jpg'),
+(56247184, 'wisnu artt', 'nextwznu@gmail.com', 'd41d8cd98f00b204e9800998ecf8427e', '083144353355', 'tulung aggung', 'default.jpg'),
+(1576407100, 'aini bahrul izza', 'ainibahrul@gmail.com', 'ainibahrul', '2038409234', 'dasdas', 'default.jpg');
 
 --
 -- Indexes for dumped tables
@@ -160,7 +148,8 @@ ALTER TABLE `t_admin`
 -- Indexes for table `t_sound`
 --
 ALTER TABLE `t_sound`
-  ADD PRIMARY KEY (`sound_id`);
+  ADD PRIMARY KEY (`sound_id`),
+  ADD KEY `id_vendor` (`id_vendor`);
 
 --
 -- Indexes for table `t_user`
@@ -173,6 +162,16 @@ ALTER TABLE `t_user`
 --
 ALTER TABLE `t_vendor`
   ADD PRIMARY KEY (`id_vendor`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `t_sound`
+--
+ALTER TABLE `t_sound`
+  ADD CONSTRAINT `t_sound_ibfk_1` FOREIGN KEY (`id_vendor`) REFERENCES `t_vendor` (`id_vendor`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
