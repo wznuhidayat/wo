@@ -19,7 +19,7 @@ class Vendor extends CI_Controller{
     public function add()
     {
         $vendor = $this->m_vendor;
-        $form_validationidation = $this->form_validation;
+        $validation = $this->form_validation;
         $validation->set_rules($vendor->rules_add());
 
         if ($validation->run()) {

@@ -7,6 +7,7 @@ class M_tenda extends CI_Model{
     public $name;
     public $vendor;
     public $price;
+    public $discount;
     public $detail;
     public $img = "default.jpg";
    
@@ -50,6 +51,7 @@ class M_tenda extends CI_Model{
         $this->name = $post["name"];
         $this->vendor = $post["vendor"];
         $this->price = $post["price"];
+        $this->discount = $post["discount"];
         $this->detail = $post["detail"];
         $this->db->insert($this->_table, $this);
     }
@@ -61,6 +63,7 @@ class M_tenda extends CI_Model{
         $this->name = $post["name"];
         $this->vendor = $post["vendor"];
         $this->price = $post["price"];
+        $this->discount = $post["discount"];
         $this->detail = $post["detail"];
         $this->db->update($this->_table, $this, array('kode_tenda' => $post['id']));
     }

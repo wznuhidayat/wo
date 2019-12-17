@@ -44,6 +44,13 @@
                                     <?= form_error('price') ?>
                                 </div>             
                             </div>
+                            <div class="form-group <?= form_error('discount') ? 'is-invalid':'' ?>">
+                                <label for="discount">Discount</label>
+                                <input type="text" class="form-control" value="<?= $tenda->discount ?>" id="discount" placeholder="discount" name="discount">
+                                <div class="invalid-feedback">
+                                    <?= form_error('discount') ?>
+                                </div>             
+                            </div>
                             <div class="form-group <?= form_error('detail') ? 'is-invalid':'' ?>">
                                 <label for="detail">Detail</label>
                                 <textarea name="detail" id="detail" cols="15" rows="5" class="form-control"><?= $tenda->detail ?></textarea>

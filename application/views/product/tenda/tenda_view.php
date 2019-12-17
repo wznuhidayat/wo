@@ -24,8 +24,9 @@
                         <tr>
                             <th>Kode tenda</th>
                             <th>Name</th>
-                            <th>Vendor</th>
+                            <th>ID Vendor</th>
                             <th>Price</th>
+                            <th>Discount</th>
                             <th>Detail</th>
                             <th>img</th>
                             <th>Option</th>
@@ -40,6 +41,7 @@
                             <td><?php echo $data->name ?></td>
                             <td><?php echo $data->vendor ?></td>
                             <td><?php echo $data->price ?></td>
+                            <td><?php echo $data->discount ?></td>
                             <td><?php echo $data->detail ?></td>
                             <td><?php echo $data->img ?></td>
                             <td class="text-center">                    
