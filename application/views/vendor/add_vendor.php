@@ -20,8 +20,7 @@
             <div class="box-body ">
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4">
-                        <?php //echo validation_errors(); ?>
-                        <form action="<?php base_url('Vendor/add') ?>" method="post" enctype="multipart/form-data">
+                        <?php echo form_open_multipart('Vendor/add');?>
                             <div class="form-group <?= form_error('name') ? 'is-invalid':'' ?>">
                                 <label for="name">Name</label>
                                 <input type="text" class="form-control" value="<?=set_value('name') ?>" id="name" placeholder="name" name="name">
@@ -52,10 +51,14 @@
                             </div>
                             <div class="form-group <?= form_error('phone') ? 'is-invalid':'' ?>">
                                 <label for="phone">Phone</label>
-                                <input type="text" class="form-control" value="<?=set_value('phone') ?>" id="phone" placeholder="phone" name="phone">
+                                <input type="numeric" class="form-control" value="<?=set_value('phone') ?>" id="phone" placeholder="phone" name="phone">
                                 <div class="invalid-feedback">
                                     <?= form_error('phone') ?>
                                 </div>        
+                            </div>
+                            <div class="form-group ">
+                                <label for="image">Image</label>
+                                <input type="file" class="form-control-file"  id="image" placeholder="image" name="image">        
                             </div>
                             <div class="form-group <?= form_error('address') ? 'is-invalid':'' ?>">
                                 <label for="address">address</label>

@@ -31,12 +31,22 @@
             <li <?= $this->uri->segment(2) == 'tenda' ? 'class="active"' : '' ?>>
               <a href="<?= base_url().'products/tenda' ?>"><i class="glyphicon glyphicon-tent"></i>Tenda</a>
             </li>
-            <li><a href="../layout/fixed.html"><i class="fa fa-magic"></i>Kuade</a></li>
-            <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-camera-retro"></i>Photographer</a></li>
-            <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-smile-o"></i>Makeup</a></li>
-            <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-female"></i>Dress</a></li>
+            <li <?= $this->uri->segment(2) == 'dress' ? 'class="active"' : '' ?>>
+              <a href="<?= base_url().'products/dress' ?>"><i class="fa fa-female"></i>Dress</a>
+            </li>
+            <li <?= $this->uri->segment(2) == 'transport' ? 'class="active"' : '' ?>>
+              <a href="<?= base_url().'products/transport' ?>"><i class="fa fa-bus"></i>Transportation</a>
+            </li>
+            <li <?= $this->uri->segment(2) == 'photograp' ? 'class="active"' : '' ?>>
+              <a href="<?= base_url().'products/photograp' ?>"><i class="fa fa-camera-retro"></i>Photographer</a>
+            </li>
+            <li <?= $this->uri->segment(2) == 'makeup' ? 'class="active"' : '' ?>>
+              <a href="<?= base_url().'products/makeup' ?>"><i class="fa fa-smile-o"></i>Makeup</a>
+            </li>
+            <li <?= $this->uri->segment(2) == 'kuade' ? 'class="active"' : '' ?>>
+              <a href="<?= base_url().'products/kuade' ?>"><i class="fa fa-magic"></i>Kuade</a>
+            </li>
             <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-cutlery"></i>Catering</a></li>
-            <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-bus"></i>Transportation</a></li>
             <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-building"></i>Gedung</a></li>
             <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-building"></i>Kursi</a></li>
           </ul>

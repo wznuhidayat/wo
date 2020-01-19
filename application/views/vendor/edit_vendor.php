@@ -58,6 +58,14 @@
                                     <?= form_error('phone') ?>
                                 </div>             
                             </div>
+                            <div class="form-group <?= form_error('image') ? 'is-invalid':'' ?>">
+                                <label for="image">Image</label>
+                                <input type="file" class="form-control-file" id="image" name="image">
+                                <input type="hidden" name="old_image" value="<?= $vendor->img ?>">
+                                <div class="invalid-feedback">
+                                    <?= form_error('image') ?>       
+                                </div>
+                            </div>
                             <div class="form-group <?= form_error('address') ? 'is-invalid':'' ?>">
                                 <label for="address">Address</label>
                                 <textarea name="address" id="address" cols="15" rows="5" class="form-control"><?= $vendor->address ?></textarea>

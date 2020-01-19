@@ -1,0 +1,20 @@
+body{
+	font-family: Segoe UI;
+}
+header.masthead{
+	 
+
+}
+h1,h2,h3,h4,h5{
+	color: white !important;
+}
+.carousel-inner img{
+  width: 100%;
+  height: 610px;
+  background-size: cover;
+}
+#about{
+	height: 400px;
+	padding: 20px;
+	background-color: 
+}

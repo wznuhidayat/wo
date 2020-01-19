@@ -24,7 +24,7 @@
                             <div class="form-group <?= form_error('fullname') ? 'has-error' : null ?>">
                                 <label for="fullname">Nama</label>
                                 <input type="hidden" name="email" value="<?= $user->email ?>">
-                                <input type="text" class="form-control" value="<?= $this->input->post('fullname') ?? $user->name ?>" id="fullname" placeholder="name" name="fullname">
+                                <input type="text" class="form-control" value="<?= $user->name ?>" id="fullname" placeholder="name" name="fullname">
                                 <?= form_error('fullname') ?>
                             </div>
                             
@@ -40,7 +40,7 @@
                             </div>
                             <div class="form-group <?= form_error('phone') ? 'has-error' : null ?>">
                                 <label for="phone">Phone</label>
-                                <input type="text" class="form-control" value="<?= $this->input->post('phone') ?? $user->phone ?>" id="phone" placeholder="phone" name="phone">
+                                <input type="text" class="form-control" value="<?=  $user->phone ?>" id="phone" placeholder="phone" name="phone">
                                 <?= form_error('phone') ?>
                             </div>
                             <div class="form-group">
@@ -53,7 +53,7 @@
                             </div>
                             <div class="form-group <?= form_error('address') ? 'has-error' : null ?>">
                                 <label for="address">Address</label>
-                                <textarea name="address" id="address" cols="15" rows="5" class="form-control"><?= $this->input->post('address') ?? $user->address ?></textarea>
+                                <textarea name="address" id="address" cols="15" rows="5" class="form-control"><?= $user->address ?></textarea>
                                 <?= form_error('address') ?>
                             </div>
                             <div class="form-group ">

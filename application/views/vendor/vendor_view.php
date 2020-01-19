@@ -1,6 +1,6 @@
 <section class="content-header">
-    <h1>Products
-        <small>Vendor</small>
+    <h1>Vendor
+        <small>Control Panel</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href=""><i class="fa fa-user"></i></a></li>
@@ -36,7 +36,9 @@
                         <?php 
                         foreach($vendor as $u => $data): ?>
                         <tr>
-                            <td><?php echo $data->img ?></td>
+                            <td>
+                                <img src="<?php echo base_url('upload/vendor/').$data->img ?>" alt="" width="64" >
+                            </td>
                             <td><?php echo $data->id_vendor ?></td>
                             <td><?php echo $data->name ?></td>
                             <td><?php echo $data->email ?></td>

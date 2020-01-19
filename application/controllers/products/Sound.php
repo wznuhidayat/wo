@@ -13,7 +13,7 @@ class Sound extends CI_Controller {
 	public function index(){
 		
 		$data['sound'] = $this->m_sound->get();
-		$this->template->load('template','product/data_sound',$data);
+		$this->template->load('template','product/sound/data_sound',$data);
 	}
 	public function del($id){
         $this->m_sound->delete($id);
@@ -45,7 +45,7 @@ class Sound extends CI_Controller {
             'selected_vendor' => null
         );
         
-        $this->template->load('template','product/sound_view',$data);
+        $this->template->load('template','product/sound/sound_view',$data);
     }
     public function edit($id){
         $query = $this->m_sound->get($id);
@@ -63,7 +63,7 @@ class Sound extends CI_Controller {
                 'selected_vendor' => $sound->id_vendor
             );
             
-            $this->template->load('template','product/sound_view',$data);
+            $this->template->load('template','product/sound/sound_view',$data);
         }
     }
     public function process(){
