@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 13, 2020 at 03:03 PM
+-- Generation Time: Jan 19, 2020 at 07:31 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -31,22 +31,12 @@ SET time_zone = "+00:00";
 CREATE TABLE `p_dress` (
   `kode_dress` varchar(12) NOT NULL,
   `name` varchar(30) NOT NULL,
+  `id_vendor` int(8) NOT NULL,
   `price` int(11) NOT NULL,
   `type` varchar(20) NOT NULL,
   `detail` varchar(300) NOT NULL,
   `img` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `p_dress`
---
-
-INSERT INTO `p_dress` (`kode_dress`, `name`, `price`, `type`, `detail`, `img`) VALUES
-('1578251871', 'batak edition', 100000, 'asd', 'aa', 'profile-200105.png'),
-('1578251923', 'jawa v2', 200000, 'asd', 'a', 'profile--200105.jpg'),
-('1578252306', 'aku adalah', 100000, 'asd', 'a', 'profile-.png'),
-('1578253861', 'aku adalah', 200000, 'asd', 'a', 'profile-200105.png'),
-('DR5066212586', 'papua', 200000, 'asd', 'a', 'profile--200105.jpg');
 
 -- --------------------------------------------------------
 
@@ -101,6 +91,7 @@ INSERT INTO `p_makeup` (`kode_makeup`, `name`, `price`, `detail`, `category`, `i
 CREATE TABLE `p_photo` (
   `kode_photograp` varchar(12) NOT NULL,
   `name` varchar(30) NOT NULL,
+  `id_vendor` int(8) NOT NULL,
   `price` int(11) NOT NULL,
   `type` varchar(20) NOT NULL,
   `detail` varchar(300) NOT NULL,
@@ -111,8 +102,9 @@ CREATE TABLE `p_photo` (
 -- Dumping data for table `p_photo`
 --
 
-INSERT INTO `p_photo` (`kode_photograp`, `name`, `price`, `type`, `detail`, `img`) VALUES
-('DR5066347257', 'reza foto', 2000000, '1', 'a', 'item-200106-fae75a8425.jpg');
+INSERT INTO `p_photo` (`kode_photograp`, `name`, `id_vendor`, `price`, `type`, `detail`, `img`) VALUES
+('PH5069225127', 'reza', 1579097421, 123, '1', 'a', 'default.jpg'),
+('PH5069226239', 'asdass', 1577102568, 123, '1', '1', 'item-200116-aa3f874fb8.png');
 
 -- --------------------------------------------------------
 
@@ -160,7 +152,8 @@ CREATE TABLE `p_transport` (
 
 INSERT INTO `p_transport` (`kode_transport`, `name`, `price`, `category`, `detail`, `img`) VALUES
 ('a', 'a', 1000000, 'a', 'a', 'item-200111-76a46a2fef.JPG'),
-('TR5066344958', 'harapan jaya', 200000, 'bus', 'a', 'item-200111-abe6f17ee7.JPG');
+('TR5066344958', 'harapan jaya', 200000, 'bus', 'a', 'item-200111-abe6f17ee7.JPG'),
+('TR5068981514', 'asdas', 1, '1', '1', 'default.jpg');
 
 -- --------------------------------------------------------
 
@@ -203,7 +196,9 @@ CREATE TABLE `t_sound` (
 --
 
 INSERT INTO `t_sound` (`sound_id`, `name`, `id_vendor`, `price`, `kategori`, `detail`, `img`) VALUES
-('SO3641656790', 'sound', 22976895, '200000', 'medium', 'asda', '');
+('SO3641656790', 'sound', 22976895, '200000', 'medium', 'asda', ''),
+('SO3648047820', 'ss', 22976895, '1', '1', '1', ''),
+('SO3648448006', 'sdfds', 22976895, '123', '1', '1', '');
 
 -- --------------------------------------------------------
 
@@ -254,7 +249,8 @@ INSERT INTO `t_vendor` (`id_vendor`, `name`, `email`, `password`, `phone`, `addr
 (22976895, 'intan maulidaa', 'intanmaulida@gmail.com', 'd41d8cd98f00b204e9800998ecf8427e', '08123456781', 'gresik', 'profile-200105.png'),
 (56247184, 'wisnu artt', 'nextwznu@gmail.com', 'd41d8cd98f00b204e9800998ecf8427e', '083144353355', 'tulung aggung', 'profile-200105.png'),
 (1577102538, 'aku adalah', 'akuadalah@gmail.com', '25d55ad283aa400af464c76d713c07ad', '0812345678', 'a', 'profile-191223.png'),
-(1577102568, 'aku wisnu', 'akuadalaha@gmail.com', '25d55ad283aa400af464c76d713c07ad', '1', 'a', 'default.jpg');
+(1577102568, 'aku wisnu', 'akuadalaha@gmail.com', '25d55ad283aa400af464c76d713c07ad', '1', 'a', 'default.jpg'),
+(1579097421, 'azrial', 'muhammadazrial@gmail.com', '25f9e794323b453885f5181f1b624d0b', '1', 'a', 'profile-200115-9dc603ead0.png');
 
 --
 -- Indexes for dumped tables
@@ -264,13 +260,15 @@ INSERT INTO `t_vendor` (`id_vendor`, `name`, `email`, `password`, `phone`, `addr
 -- Indexes for table `p_dress`
 --
 ALTER TABLE `p_dress`
-  ADD PRIMARY KEY (`kode_dress`);
+  ADD PRIMARY KEY (`kode_dress`),
+  ADD UNIQUE KEY `id_vendor` (`id_vendor`);
 
 --
 -- Indexes for table `p_photo`
 --
 ALTER TABLE `p_photo`
-  ADD PRIMARY KEY (`kode_photograp`);
+  ADD PRIMARY KEY (`kode_photograp`),
+  ADD UNIQUE KEY `id_vendor` (`id_vendor`);
 
 --
 -- Indexes for table `p_tenda`
@@ -312,6 +310,12 @@ ALTER TABLE `t_vendor`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `p_photo`
+--
+ALTER TABLE `p_photo`
+  ADD CONSTRAINT `p_photo_ibfk_1` FOREIGN KEY (`id_vendor`) REFERENCES `t_vendor` (`id_vendor`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `t_sound`
