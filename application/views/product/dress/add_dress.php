@@ -28,6 +28,10 @@
                                     <?= form_error('name') ?>
                                 </div>        
                             </div>
+                            <div class="form-group">
+                                <label for="id_vendor">ID Vendor</label>
+                                <?= form_dropdown('id_vendor', $vendor, $selected, ['class' => 'form-control' , 'required' => 'required']) ?>  
+                            </div>
                             <div class="form-group <?= form_error('price') ? 'is-invalid':'' ?>">
                                 <label for="price">price</label>
                                 <input type="text" class="form-control" value="<?=set_value('price') ?>" id="price" placeholder="price" name="price">

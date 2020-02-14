@@ -22,12 +22,12 @@
                 <table class="table table-bordered table-striped" id="table1">
                     <thead>
                         <tr>
+                            <th>img</th>
                             <th>Sound id</th>
                             <th>Nama</th>
                             <th>Vendor</th>
                             <th>Price</th>
                             <th>Detail</th>
-                            <th>img</th>
                             <th>Option</th>
                             
                         </tr>
@@ -36,12 +36,14 @@
                     <?php 
                     foreach($sound->result() as $u => $data): ?>
                         <tr>
+                            <td>
+                                <img src="<?php echo base_url('upload/products/').$data->img ?>" alt="" width="64" >
+                            </td>
                             <td><?php echo $data->sound_id ?></td>
                             <td><?php echo $data->name ?></td>
-                            <td><?php echo $data->id_vendor ?></td>
+                            <td><?php echo $data->vendor_name ?></td>
                             <td><?php echo $data->price ?></td>
                             <td><?php echo $data->detail ?></td>
-                            <td><?php echo $data->img ?></td>
                             <td class="text-center">
                                 
                                 <!-- <a onclick="javascript: return confirm('are you sure to delete this data?')"> <?//php echo anchor('user/del/'.$data->email, '<div class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></div>') ?> -->

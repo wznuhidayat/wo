@@ -46,14 +46,20 @@
             <li <?= $this->uri->segment(2) == 'kuade' ? 'class="active"' : '' ?>>
               <a href="<?= base_url().'products/kuade' ?>"><i class="fa fa-magic"></i>Kuade</a>
             </li>
-            <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-cutlery"></i>Catering</a></li>
-            <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-building"></i>Gedung</a></li>
-            <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-building"></i>Kursi</a></li>
+            <li <?= $this->uri->segment(2) == 'catering' ? 'class="active"' : '' ?>>
+              <a href="<?= base_url().'products/catering' ?>"><i class="fa fa-cutlery"></i>Catering</a>
+            </li>
+            <li <?= $this->uri->segment(2) == 'gedung' ? 'class="active"' : '' ?>>
+              <a href="<?= base_url().'products/gedung' ?>"><i class="fa fa-building"></i>Gedung</a>
+            </li>
+            <li <?= $this->uri->segment(2) == 'kursi' ? 'class="active"' : '' ?>>
+              <a href="<?= base_url().'products/kursi' ?>"><i class="fa fa-building"></i>Kursi</a>
+            </li>
           </ul>
         </li>
-        <li>
-          <a href="pages/widgets.html">
-            <i class="fa fa-calendar-o"></i> <span>Schedule</span>
+        <li <?= $this->uri->segment(1) == 'schedule' ? 'class="active"' : '' ?>>
+          <a href="<?= base_url().'schedule'; ?>">
+            <i class="fa fa-user"></i> <span>Schedule</span>
           </a>
         </li>
          <li>
@@ -64,6 +70,13 @@
         <li>
           <a href="pages/widgets.html">
             <i class="fa fa-line-chart"></i> <span>Reports</span>
+          </a>
+        </li>
+        <li class="header">Admin</li>
+        <li <?= $this->uri->segment(2) == 'list_view' ? 'class="active"' : '' ?>>
+          <a href="<?= base_url().'admin/list_view';?>">
+            <i class="fa fa-users"></i>
+            <span>User</span>
           </a>
         </li>
      </ul>

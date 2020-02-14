@@ -54,14 +54,14 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?= base_url() ?>assets/adminlte/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="<?= base_url('upload/admin/').$this->funct->admin_login()->img ?>" class="user-image" alt="User Image">
               <span class="hidden-xs"><?php echo $this->funct->admin_login()->name ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?= base_url() ?>assets/adminlte/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
+                <img src="<?= base_url('upload/admin/').$this->funct->admin_login()->img ?>" class="img-circle" alt="User Image" >
+                <?php //echo var_dump($this->funct->admin_login()); ?>
                 <p>
                   <?php echo $this->funct->admin_login()->name ?> - Admin
                   <small>Member since Nov. 2012</small>

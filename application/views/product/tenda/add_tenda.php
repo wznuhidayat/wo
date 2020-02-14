@@ -29,12 +29,9 @@
                                     <?= form_error('name') ?>
                                 </div>        
                             </div>
-                            <div class="form-group <?= form_error('vendor') ? 'is-invalid':'' ?>">
-                                <label for="vendor">Vendor</label>
-                                <input type="number" class="form-control" value="<?=set_value('vendor') ?>" id="vendor" placeholder="vendor" name="vendor">
-                                <div class="invalid-feedback">
-                                    <?= form_error('vendor') ?>       
-                                </div>
+                            <div class="form-group">
+                                <label for="id_vendor">ID Vendor</label>
+                                <?= form_dropdown('id_vendor', $vendor, $selected, ['class' => 'form-control' , 'required' => 'required']) ?>  
                             </div>
                             <div class="form-group <?= form_error('price') ? 'is-invalid':'' ?>">
                                 <label for="price">Price</label>
@@ -49,6 +46,13 @@
                                 <div class="invalid-feedback">
                                     <?= form_error('discount') ?>
                                 </div>             
+                            </div>
+                            <div class="form-group <?= form_error('image') ? 'is-invalid':'' ?>">
+                                <label for="image">Image</label>
+                                <input type="file" class="form-control-file" id="image" name="image">
+                                <div class="invalid-feedback">
+                                    <?= form_error('image') ?>       
+                                </div>
                             </div>
                             <div class="form-group <?= form_error('detail') ? 'is-invalid':'' ?>">
                                 <label for="detail">Detail</label>

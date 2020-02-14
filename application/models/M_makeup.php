@@ -5,9 +5,11 @@ class M_makeup extends CI_Model{
 
     public $kode_makeup;
     public $name;
+    public $id_vendor;
     public $price;
     public $category;
     public $detail;
+
     public $img = "default.jpg";
    
 
@@ -37,7 +39,10 @@ class M_makeup extends CI_Model{
 
     public function getAll()
     {
-        return $this->db->get($this->_table)->result();
+        $this->db->select($this->_table.".*, t_vendor.name as vendor_name");
+        $this->db->from($this->_table);
+        $this->db->join("t_vendor", "t_vendor.id_vendor = ".$this->_table.".id_vendor");
+        return $this->db->get()->result();
     }
     
     public function getById($id)
@@ -48,9 +53,10 @@ class M_makeup extends CI_Model{
     public function save()
     {
         $post = $this->input->post();
-        $kode = 'TR';
+        $kode = 'MK';
         $this->kode_makeup = $kode.floor(microtime(true)*321);
         $this->name = $post["name"];
+        $this->id_vendor = $post["id_vendor"];
         $this->price = $post["price"];
         $this->category = $post["category"];
         $this->detail = $post["detail"];
@@ -63,6 +69,7 @@ class M_makeup extends CI_Model{
         $post = $this->input->post();
         $this->kode_makeup = $post["id"];
         $this->name = $post["name"];
+        $this->id_vendor = $post["id_vendor"];
         $this->price = $post["price"];
         $this->category = $post["category"];
         if (!empty($_FILES["image"]["name"])) {

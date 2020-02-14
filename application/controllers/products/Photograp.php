@@ -5,6 +5,7 @@ class Photograp extends CI_Controller{
 	public function __construct()
     {
         parent::__construct();
+        check_not_login();
         $this->load->model(['m_Photograp','m_vendor']);
         $this->load->library('form_validation');
     }
@@ -57,7 +58,6 @@ class Photograp extends CI_Controller{
         foreach ($query_vendor as $ven) {
              $vendor[$ven->id_vendor] = $ven->id_vendor;
         }
-        // $photo = new stdClass();
         $photo = $Photograp->getById($id);
         $data['Photograp'] = $photo;
         $data['vendor'] = $vendor; 

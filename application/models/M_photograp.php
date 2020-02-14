@@ -38,7 +38,10 @@ class M_Photograp extends CI_Model{
 
     public function getAll()
     {
-        return $this->db->get($this->_table)->result();
+        $this->db->select($this->_table.".*, t_vendor.name as vendor_name");
+        $this->db->from($this->_table);
+        $this->db->join("t_vendor", "t_vendor.id_vendor = ".$this->_table.".id_vendor");
+        return $this->db->get()->result();
     }
     
     public function getById($id)

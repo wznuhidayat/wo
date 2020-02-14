@@ -22,13 +22,13 @@
                 <table class="table table-bordered table-striped" id="table1">
                     <thead>
                         <tr>
+                            <th>img</th>
                             <th>Kode tenda</th>
                             <th>Name</th>
-                            <th>ID Vendor</th>
+                            <th>Vendor</th>
                             <th>Price</th>
                             <th>Discount</th>
                             <th>Detail</th>
-                            <th>img</th>
                             <th>Option</th>
                             
                         </tr>
@@ -37,13 +37,15 @@
                     <?php 
                     foreach($tenda as $u => $data): ?>
                         <tr>
+                            <td>
+                                <img src="<?php echo base_url('upload/products/').$data->img ?>" alt="" width="64" >
+                            </td>
                             <td><?php echo $data->kode_tenda ?></td>
                             <td><?php echo $data->name ?></td>
-                            <td><?php echo $data->vendor ?></td>
+                            <td><?php echo $data->vendor_name ?></td>
                             <td><?php echo $data->price ?></td>
                             <td><?php echo $data->discount ?></td>
                             <td><?php echo $data->detail ?></td>
-                            <td><?php echo $data->img ?></td>
                             <td class="text-center">                    
                                     <a ><?php echo anchor('products/tenda/edit/'.$data->kode_tenda, '<div class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></div>') ?>
                                     </a>

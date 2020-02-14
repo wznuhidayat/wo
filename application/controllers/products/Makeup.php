@@ -5,7 +5,8 @@ class Makeup extends CI_Controller{
 	public function __construct()
     {
         parent::__construct();
-        $this->load->model('m_makeup');
+        check_not_login();
+        $this->load->model(['m_makeup','m_vendor']);
         $this->load->library('form_validation');
     }
 
@@ -19,6 +20,7 @@ class Makeup extends CI_Controller{
     public function add()
     {
         $makeup = $this->m_makeup;
+        $query_vendor = $this->m_vendor->getAll();
         $validation = $this->form_validation;
         $validation->set_rules($makeup->rules());
 
@@ -27,8 +29,14 @@ class Makeup extends CI_Controller{
             $this->session->set_flashdata('success', 'Data Successfully Added');
             redirect('products/makeup');
         }
+        $vendor[null] = '- Select -';
+        foreach ($query_vendor as $ven) {
+             $vendor[$ven->id_vendor] = $ven->id_vendor;
+        }
+        $data['vendor'] = $vendor; 
+        $data['selected'] = null;
 
-        $this->template->load('template','product/makeup/add_makeup');
+        $this->template->load('template','product/makeup/add_makeup',$data);
     }
 
     public function edit($id = null)
@@ -36,6 +44,7 @@ class Makeup extends CI_Controller{
         if (!isset($id)) redirect('products/makeup');
        
         $makeup = $this->m_makeup;
+        $query_vendor = $this->m_vendor->getAll();
         $validation = $this->form_validation;
         $validation->set_rules($makeup->rules());
 
@@ -46,8 +55,14 @@ class Makeup extends CI_Controller{
             }
             redirect('products/makeup');
         }
-
-        $data['makeup'] = $makeup->getById($id);
+        $vendor[null] = '- Select -';
+        foreach ($query_vendor as $ven) {
+             $vendor[$ven->id_vendor] = $ven->id_vendor;
+        }
+        $mk = $makeup->getById($id);
+        $data['vendor'] = $vendor; 
+        $data['selected'] = $mk->id_vendor;
+        $data['makeup'] = $mk;
         if (!$data['makeup']) show_404();
         
         $this->template->load('template','product/makeup/edit_makeup',$data);

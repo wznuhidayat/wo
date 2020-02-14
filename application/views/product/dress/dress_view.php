@@ -26,6 +26,7 @@
                             <th>Img</th>
                             <th>Kode Dress</th>
                             <th>Name</th>
+                            <th>Vendor</th>
                             <th>Price</th>
                             <th>Type</th>
                             <th>Detail</th>
@@ -41,6 +42,7 @@
                             </td>
                             <td><?php echo $data->kode_dress ?></td>
                             <td><?php echo $data->name ?></td>
+                            <td><?php echo $data->vendor_name ?></td>
                             <td><?php echo $data->price ?></td>
                             <td><?php echo $data->type ?></td>
                             <td><?php echo $data->detail ?></td>

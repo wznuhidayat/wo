@@ -48,15 +48,12 @@ class Auth extends CI_Controller{
 				$params = array(
 					'username' => $row->username,
 					'name' => $row->name,
+					'img' => $row->img
 				);
 				$this->session->set_userdata($params);
-				echo "<script>
-					window.location='".site_url('admin/dashboard')."';
-				</script>";
+				redirect('admin/dashboard');
 			}else{
-				echo "<script>alert(' Login failed');
-					window.location='".site_url('admin/login')."';
-				</script>";
+				redirect('admin/login');
 			}
 		}
 	}

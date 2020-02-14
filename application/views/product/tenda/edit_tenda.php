@@ -30,13 +30,11 @@
                                     <?= form_error('name') ?>
                                 </div>        
                             </div>
-                            <div class="form-group <?= form_error('vendor') ? 'is-invalid':'' ?>">
-                                <label for="vendor">Vendor</label>
-                                <input type="text" class="form-control" value="<?= $tenda->vendor ?>" id="vendor" placeholder="vendor" name="vendor">
-                                <div class="invalid-feedback">
-                                    <?= form_error('vendor') ?>       
-                                </div>
+                            <div class="form-group">
+                                <label for="id_vendor">ID Vendor</label>
+                                <?= form_dropdown('id_vendor', $vendor, $selected, ['class' => 'form-control' , 'required' => 'required']) ?>  
                             </div>
+                            
                             <div class="form-group <?= form_error('price') ? 'is-invalid':'' ?>">
                                 <label for="price">Price</label>
                                 <input type="text" class="form-control" value="<?= $tenda->price ?>" id="price" placeholder="price" name="price">
@@ -50,6 +48,14 @@
                                 <div class="invalid-feedback">
                                     <?= form_error('discount') ?>
                                 </div>             
+                            </div>
+                            <div class="form-group <?= form_error('image') ? 'is-invalid':'' ?>">
+                                <label for="image">Image</label>
+                                <input type="file" class="form-control-file" id="image" name="image">
+                                <input type="hidden" name="old_image" value="<?= $tenda->img ?>">
+                                <div class="invalid-feedback">
+                                    <?= form_error('image') ?>       
+                                </div>
                             </div>
                             <div class="form-group <?= form_error('detail') ? 'is-invalid':'' ?>">
                                 <label for="detail">Detail</label>

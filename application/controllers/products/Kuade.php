@@ -5,7 +5,8 @@ class Kuade extends CI_Controller{
 	public function __construct()
     {
         parent::__construct();
-        $this->load->model('m_kuade');
+        check_not_login();
+        $this->load->model(['m_kuade','m_vendor']);
         $this->load->library('form_validation');
     }
 
@@ -20,6 +21,7 @@ class Kuade extends CI_Controller{
     {
         $kuade = $this->m_kuade;
         $validation = $this->form_validation;
+        $query_vendor = $this->m_vendor->getAll();
         $validation->set_rules($kuade->rules());
 
         if ($validation->run()) {
@@ -27,8 +29,14 @@ class Kuade extends CI_Controller{
             $this->session->set_flashdata('success', 'Data Successfully Added');
             redirect('products/kuade');
         }
+        $vendor[null] = '- Select -';
+        foreach ($query_vendor as $ven) {
+             $vendor[$ven->id_vendor] = $ven->id_vendor;
+        }
+        $data['vendor'] = $vendor; 
+        $data['selected'] = null;
 
-        $this->template->load('template','product/kuade/add_kuade');
+        $this->template->load('template','product/kuade/add_kuade',$data);
     }
 
     public function edit($id = null)
@@ -37,6 +45,7 @@ class Kuade extends CI_Controller{
        
         $kuade = $this->m_kuade;
         $validation = $this->form_validation;
+        $query_vendor = $this->m_vendor->getAll();
         $validation->set_rules($kuade->rules());
 
         if ($validation->run()) {
@@ -46,8 +55,15 @@ class Kuade extends CI_Controller{
             }
             redirect('products/kuade');
         }
+        $vendor[null] = '- Select -';
+        foreach ($query_vendor as $ven) {
+             $vendor[$ven->id_vendor] = $ven->id_vendor;
+        }
 
-        $data['kuade'] = $kuade->getById($id);
+        $ku = $kuade->getById($id);
+        $data['vendor'] = $vendor; 
+        $data['selected'] = $ku->id_vendor;
+        $data['kuade'] = $ku;
         if (!$data['kuade']) show_404();
         
         $this->template->load('template','product/kuade/edit_kuade',$data);

@@ -5,6 +5,7 @@ class Dress extends CI_Controller{
 	public function __construct()
     {
         parent::__construct();
+        check_not_login();
         $this->load->model(['m_dress','m_vendor']);
         $this->load->library('form_validation');
     }
@@ -35,7 +36,7 @@ class Dress extends CI_Controller{
         $data['vendor'] = $vendor; 
         $data['selected'] = null;
 
-        $this->template->load('template','product/dress/add_dress');
+        $this->template->load('template','product/dress/add_dress',$data);
     }
 
     public function edit($id = null)
@@ -43,6 +44,7 @@ class Dress extends CI_Controller{
         if (!isset($id)) redirect('products/dress');
        
         $dress = $this->m_dress;
+        $query_vendor = $this->m_vendor->getAll();
         $validation = $this->form_validation;
         $validation->set_rules($dress->rules());
 
@@ -53,8 +55,14 @@ class Dress extends CI_Controller{
             }
             redirect('products/dress');
         }
-
-        $data['dress'] = $dress->getById($id);
+        $vendor[null] = '- Select -';
+        foreach ($query_vendor as $ven) {
+             $vendor[$ven->id_vendor] = $ven->id_vendor;
+        }
+        $dr = $dress->getById($id);
+        $data['vendor'] = $vendor; 
+        $data['selected'] = $dr->id_vendor;
+        $data['dress'] = $dr;
         if (!$data['dress']) show_404();
         
         $this->template->load('template','product/dress/edit_dress',$data);

@@ -43,10 +43,11 @@
                                 <label for="detail">Detail product</label>
                                 <textarea name="detail" id="detail" cols="15" rows="5" class="form-control"><?= $sound->detail ?></textarea>  
                             </div>
-                            <!-- div class="form-group">
-                                <label for="img">img</label>
-                                <input type="text" class="form-control" value="" id="img" placeholder="img" name="id_vendor" required  >   
-                            </div> -->
+                            <div class="form-group ">
+                                <label for="image">Image</label>
+                                <input type="hidden" name="old_image" value="<?= $sound->img ?>">        
+                                <input type="file" class="form-control-file"  id="image" placeholder="image" name="image">
+                            </div>
                             
                             <div class="form-group ">
                                 <button type="submit" name="<?= $page ?>" class="btn btn-success btn-flat">Save</button>

@@ -26,6 +26,7 @@
                             <th>Img</th>
                             <th>Kode kuade</th>
                             <th>Name</th>
+                            <th>Vendor</th>
                             <th>Price</th>
                             <th>Category</th>
                             <th>Detail</th>
@@ -41,6 +42,7 @@
                             </td>
                             <td><?php echo $data->kode_kuade ?></td>
                             <td><?php echo $data->name ?></td>
+                            <td><?php echo $data->vendor_name ?></td>
                             <td><?php echo $data->price ?></td>
                             <td><?php echo $data->category ?></td>
                             <td><?php echo $data->detail ?></td>

@@ -5,7 +5,8 @@ class Transport extends CI_Controller{
 	public function __construct()
     {
         parent::__construct();
-        $this->load->model('m_transport');
+        check_not_login();
+        $this->load->model(['m_transport','m_vendor']);
         $this->load->library('form_validation');
     }
 
@@ -20,6 +21,7 @@ class Transport extends CI_Controller{
     {
         $transport = $this->m_transport;
         $validation = $this->form_validation;
+        $query_vendor = $this->m_vendor->getAll();
         $validation->set_rules($transport->rules());
 
         if ($validation->run()) {
@@ -27,8 +29,14 @@ class Transport extends CI_Controller{
             $this->session->set_flashdata('success', 'Data Successfully Added');
             redirect('products/transport');
         }
+        $vendor[null] = '- Select -';
+        foreach ($query_vendor as $ven) {
+             $vendor[$ven->id_vendor] = $ven->id_vendor;
+        }
+        $data['vendor'] = $vendor; 
+        $data['selected'] = null;
 
-        $this->template->load('template','product/transport/add_transport');
+        $this->template->load('template','product/transport/add_transport',$data);
     }
 
     public function edit($id = null)
@@ -36,6 +44,7 @@ class Transport extends CI_Controller{
         if (!isset($id)) redirect('products/transport');
        
         $transport = $this->m_transport;
+        $query_vendor = $this->m_vendor->getAll();
         $validation = $this->form_validation;
         $validation->set_rules($transport->rules());
 
@@ -46,8 +55,14 @@ class Transport extends CI_Controller{
             }
             redirect('products/transport');
         }
-
-        $data['transport'] = $transport->getById($id);
+        $vendor[null] = '- Select -';
+        foreach ($query_vendor as $ven) {
+             $vendor[$ven->id_vendor] = $ven->id_vendor;
+        }
+        $tr = $transport->getById($id);
+        $data['vendor'] = $vendor; 
+        $data['selected'] = $tr->id_vendor;
+        $data['transport'] = $tr;
         if (!$data['transport']) show_404();
         
         $this->template->load('template','product/transport/edit_transport',$data);

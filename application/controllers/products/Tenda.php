@@ -5,7 +5,8 @@ class Tenda extends CI_Controller{
 	public function __construct()
     {
         parent::__construct();
-        $this->load->model("m_tenda");
+        check_not_login();
+        $this->load->model(['m_tenda','m_vendor']);
         $this->load->library('form_validation');
     }
 
@@ -20,6 +21,7 @@ class Tenda extends CI_Controller{
     {
         $tenda = $this->m_tenda;
         $validation = $this->form_validation;
+        $query_vendor = $this->m_vendor->getAll();
         $validation->set_rules($tenda->rules());
 
         if ($validation->run()) {
@@ -27,8 +29,13 @@ class Tenda extends CI_Controller{
             $this->session->set_flashdata('success', 'Data Successfully Added');
             redirect('products/tenda');
         }
-
-        $this->template->load('template','product/tenda/add_tenda');
+        $vendor[null] = '- Select -';
+        foreach ($query_vendor as $ven) {
+             $vendor[$ven->id_vendor] = $ven->id_vendor;
+        }
+        $data['vendor'] = $vendor; 
+        $data['selected'] = null;
+        $this->template->load('template','product/tenda/add_tenda',$data);
     }
 
     public function edit($id = null)
@@ -36,6 +43,7 @@ class Tenda extends CI_Controller{
         if (!isset($id)) redirect('products/tenda');
        
         $tenda = $this->m_tenda;
+        $query_vendor = $this->m_vendor->getAll();
         $validation = $this->form_validation;
         $validation->set_rules($tenda->rules());
 
@@ -46,8 +54,14 @@ class Tenda extends CI_Controller{
             }
             redirect('products/tenda');
         }
-
-        $data["tenda"] = $tenda->getById($id);
+        $vendor[null] = '- Select -';
+        foreach ($query_vendor as $ven) {
+             $vendor[$ven->id_vendor] = $ven->id_vendor;
+        }
+        $tn = $tenda->getById($id);
+        $data['vendor'] = $vendor; 
+        $data['selected'] = $tn->id_vendor;
+        $data["tenda"] = $tn;
         if (!$data["tenda"]) show_404();
         
         $this->template->load('template','product/tenda/edit_tenda',$data);
