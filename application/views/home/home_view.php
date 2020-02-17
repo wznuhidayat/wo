@@ -1,6 +1,6 @@
-<nav class="navbar navbar-dark bg-dark navbar-expand fixed-top" id="mainNav">
+<nav class="navbar navbar-dark navbar-expand fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand" href="#"><b>Wisnu WO</b></a>
+        <a class="navbar-brand js-scroll-trigger" href="#"><b>Wisnu WO</b></a>
       
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav text-uppercase ml-auto">
@@ -14,10 +14,7 @@
             <a class="nav-link js-scroll-trigger" href="#about">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#team">Team</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+            <a class="nav-link js-scroll-trigger" href="#testimoni">Testimoni</a>
           </li>
         </ul>
       </div>
@@ -97,7 +94,7 @@
     </div>
   </div>
 </section>
-<section class="page-section" id="about">
+<section class="page-section bg-light" id="about">
   <div class="container">
     <div class="row">
         <div class="col-lg-12 text-center mb-4">
@@ -112,20 +109,51 @@
     </div>
   </div>
 </section>
-<section class="page-section" id="contact">
+<section class="page-section" id="testimoni">
   <div class="container">
     <div class="row">
         <div class="col-lg-12 text-center mb-4">
-          <h2 class="section-heading text-uppercase">Contact</h2>
+          <h2 class="section-heading text-uppercase">Testimoni</h2>
         </div>
-        <div class="col-md-3 text-center">
-          <h3>Location</h3>
-        </div>
-        <div class="col-md-3"></div>
-        <div class="col-md-3 text-center">
-          <h2>Social Media</h2>
-          <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit eligendi, tenetur ducimus, temporibus dolorem nisi natus vitae culpa dignissimos repudiandae minus esse adipisci consequatur voluptatibus fugit ullam, reprehenderit deserunt eveniet?</p>
-        </div>
+        
     </div>
   </div>
 </section>
+<footer class="footer">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-4">
+          <span class="copyright">Copyright &copy; Your Website 2019</span>
+        </div>
+        <div class="col-md-4">
+          <ul class="list-inline social-buttons">
+            <li class="list-inline-item">
+              <a href="#">
+                <i class="fa fa-twitter"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <i class="fa fa-facebook-f"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <i class="fa fa-linkedin"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <ul class="list-inline quicklinks">
+            <li class="list-inline-item">
+              <a href="#">Privacy Policy</a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">Terms of Use</a>
+            </li>
+          </ul>
+        </div>
+    </div>
+  </div>  
+</footer>
