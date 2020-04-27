@@ -1,6 +1,48 @@
 <?php 
-
+ 
 class M_user extends CI_Model{
+	private $_table = "t_user";
+	public function rules_add()
+    {
+        
+        return [
+            ['field' => 'nameFirst',
+            'label' => 'nameFirst',
+            'rules' => 'required'],
+
+             ['field' => 'nameSecond',
+            'label' => 'nameSecond',
+            'rules' => 'required'],
+
+            ['field' => 'email',
+            'label' => 'email',
+            'rules' => 'required|valid_email|is_unique[t_user.email]'],
+
+            ['field' => 'password',
+            'label' => 'password',
+            'rules' => 'required|min_length[8]'],
+
+            ['field' => 'passconf',
+            'label' => 'pass confir',
+            'rules' => 'required|matches[password]']
+            
+            
+            
+        ];
+    }
+    public function save()
+    {
+        $post = $this->input->post();
+        // $this->id_vendor = floor(microtime(true));
+        $this->name = $post["nameFirst"] + $post["nameSecond"];
+        $this->email = $post["email"];
+        $this->password = md5($post["password"]);
+        // $this->phone = $post["phone"];
+        // $this->address = $post["address"];
+        // $this->img = $this->_uploadImage();
+        $this->db->insert($this->_table, $this);
+    }
+
 	public function login($post){
 		$this->db->select('*');
 		$this->db->from('t_user');

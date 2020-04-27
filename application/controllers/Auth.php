@@ -1,13 +1,31 @@
 <?php 
-
+ 
 class Auth extends CI_Controller{
+	public function __construct()
+    {
+        parent::__construct();
+        // check_not_login();
+        $this->load->model('m_user');
+        $this->load->library('form_validation');
+    }
 	public function login(){
 		check_already_login();
-		$this->template->load('template-bootstrap','auth/login');
+		$this->template->load('template-auth','auth/login');
 
 	}
+
 	public function registration(){
-		$this->template->load('template-bootstrap','auth/registration');
+		$user = $this->m_user;
+        $validation = $this->form_validation;
+        $validation->set_rules($user->rules_add());
+
+        if ($validation->run()) {
+            $user->save();
+            $this->session->set_flashdata('success', 'Data Successfully Added');
+            redirect('main');
+        }
+
+        $this->template->load('template-auth','auth/registration');
 	}
 	public function process(){
 		$post = $this->input->post(null,TRUE);
@@ -27,7 +45,7 @@ class Auth extends CI_Controller{
 				</script>";
 			}else{
 				echo "<script>alert(' Login failed');
-					window.location='".site_url('auth/login')."';
+					window.location='".site_url('admin/login')."';
 				</script>";
 			}
 		}
@@ -53,7 +71,9 @@ class Auth extends CI_Controller{
 				$this->session->set_userdata($params);
 				redirect('admin/dashboard');
 			}else{
-				redirect('admin/login');
+				echo "<script>alert(' Login failed');
+					window.location='".site_url('admin/login')."';
+				</script>";
 			}
 		}
 	}

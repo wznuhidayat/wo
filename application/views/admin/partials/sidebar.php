@@ -16,6 +16,11 @@
             <i class="fa fa-user"></i> <span>Vendor</span>
           </a>
         </li>
+        <li <?= $this->uri->segment(1) == 'blog' ? 'class="active"' : '' ?>>
+          <a href="<?= base_url().'administration/blog'; ?>">
+            <i class="fa fa-newspaper-o"></i> <span>Blog</span>
+          </a>
+        </li>
         <li class="treeview <?= $this->uri->segment(1) == 'products' ? 'active' : '' ?>">
           <a href="#">
             <i class="fa fa-cubes"></i>

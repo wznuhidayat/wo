@@ -26,7 +26,7 @@ class Admin extends CI_Controller {
     {
 
         $data['admin'] = $this->m_admin->getAll();
-        $this->template->load('template','admin/admin_list',$data);
+        $this->template->load('template','admin/admin/admin_list',$data);
     }
 
 
@@ -42,7 +42,7 @@ class Admin extends CI_Controller {
             redirect('admin/list_view');
         }
 
-        $this->template->load('template','admin/add_admin');
+        $this->template->load('template','admin/admin/add_admin');
     }
 
     public function edit($username = null)
@@ -64,7 +64,7 @@ class Admin extends CI_Controller {
         $data['admin'] = $admin->getById($username);
         if (!$data['admin']) show_404();
         
-        $this->template->load('template','admin/edit_admin',$data);
+        $this->template->load('template','admin/admin/edit_admin',$data);
     }
     public function delete($username=null)
     {

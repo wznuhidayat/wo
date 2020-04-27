@@ -1,61 +1,57 @@
+	
+	<section id="form-card">
+		<div class="container">
+			<div class="row shadow-lg">
+				<div class="col-md-6">
+					<img src="<?php echo base_url('assets/img/regis.jpg'); ?>" alt="" class="img-thumbnail" height="660">
+				</div>
+				<div class="col-md-6 p-5">
+	    	<!-- Default form register -->
+	    		<h4 class="mb-4 mt-4 text-center">Sign Up</h4>
 
-    <div class="card col-4 mx-auto shadow-sm mt-2">
-    	<!-- Default form register -->
-	<form class="text-center border border-light p-4" action="#!">
+				<?php echo form_open_multipart('auth/registration');?>
+				    <div class="form-row mb-4">
+				        <div class="col">
+				            <!-- First name -->
+				            <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="First name" name="nameFirst">
+				        </div>
+				        <div class="col">
+				            <!-- Last name -->
+				            <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Last name" name="nameSecond">
+				        </div>
+				    </div>
 
-	    <p class="h4 mb-4">Sign up</p>
+				    <!-- E-mail -->
+				    <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail" name="email">
 
-	    <div class="form-row mb-4">
-	        <div class="col">
-	            <!-- First name -->
-	            <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="First name">
-	        </div>
-	        <div class="col">
-	            <!-- Last name -->
-	            <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Last name">
-	        </div>
-	    </div>
+				    <!-- Password -->
+				    <input type="password" id="defaultRegisterFormPassword" class="form-control mb-4" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" name="password">
 
-	    <!-- E-mail -->
-	    <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
+					<input type="password"  class="form-control mb-4" placeholder="Password confirm" aria-describedby="defaultRegisterFormPasswordHelpBlock" name="passconf">
+				    <!-- Phone number -->
+				   <!--  <input type="text" id="defaultRegisterPhonePassword" class="form-control" placeholder="Phone number" aria-describedby="defaultRegisterFormPhoneHelpBlock"> -->
+				    
 
-	    <!-- Password -->
-	    <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
-	    <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
-	        At least 8 characters and 1 digit
-	    </small>
+				    <!-- Sign up button -->
+				    <button class="btn btn-danger my-4 btn-block" type="submit">Sign in</button>
 
-	    <!-- Phone number -->
-	    <input type="text" id="defaultRegisterPhonePassword" class="form-control" placeholder="Phone number" aria-describedby="defaultRegisterFormPhoneHelpBlock">
-	    <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
-	        Optional - for two step authentication
-	    </small>
+				    <!-- Social register -->
+				    <p>or sign up with:</p>
 
-	    <!-- Newsletter -->
-	    <div class="custom-control custom-checkbox">
-	        <input type="checkbox" class="custom-control-input" id="defaultRegisterFormNewsletter">
-	        <label class="custom-control-label" for="defaultRegisterFormNewsletter">Subscribe to our newsletter</label>
-	    </div>
+				    <a href="#" class="mx-2" role="button"><i class="fa fa-facebook-f light-blue-text fa-2x"></i></a>
+				    <a href="#" class="mx-2" role="button"><i class="fa fa-twitter light-blue-text fa-2x"></i></a>
+				    <a href="#" class="mx-2" role="button"><i class="fa fa-linkedin light-blue-text fa-2x"></i></a>
+				    <a href="#" class="mx-2" role="button"><i class="fa fa-github light-blue-text fa-2x"></i></a>
 
-	    <!-- Sign up button -->
-	    <button class="btn btn-danger my-4 btn-block" type="submit">Sign in</button>
+				    <hr>
 
-	    <!-- Social register -->
-	    <p>or sign up with:</p>
+				    <!-- Terms of service -->
+				    <p>already a member ?
+				        <a href="<?php echo base_url('auth/login') ?>" target="_blank">Sign in</a>
 
-	    <a href="#" class="mx-2" role="button"><i class="fab fa-facebook-f light-blue-text"></i></a>
-	    <a href="#" class="mx-2" role="button"><i class="fab fa-twitter light-blue-text"></i></a>
-	    <a href="#" class="mx-2" role="button"><i class="fab fa-linkedin-in light-blue-text"></i></a>
-	    <a href="#" class="mx-2" role="button"><i class="fab fa-github light-blue-text"></i></a>
-
-	    <hr>
-
-	    <!-- Terms of service -->
-	    <p>By clicking
-	        <em>Sign up</em> you agree to our
-	        <a href="" target="_blank">terms of service</a>
-
-	</form>
-<!-- Default form register -->
-    </div>
-
+				</form>
+			<!-- Default form register -->
+			    </div>
+			</div>
+		</div>
+	</section>
