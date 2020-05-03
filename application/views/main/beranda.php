@@ -319,8 +319,6 @@
                   </div>
                   <div class="add-to-cart">
                     <a href="#" class="btn">Add to cart</a>
-                    <a href="#" class="btn min"><i class="ti-heart"></i></a>
-                    <a href="#" class="btn min"><i class="fa fa-compress"></i></a>
                   </div>
                     <div class="default-social">
                     <h4 class="share-now">Share:</h4>

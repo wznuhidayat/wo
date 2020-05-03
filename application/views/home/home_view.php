@@ -17,7 +17,7 @@
               <a class="nav-link js-scroll-trigger " href="#counters">Counters</a>
             </li>
             <li class="nav-item">
-              <a class="js-scroll-trigger btn btn-sm btn-dark text-Capitalize" href="<?php echo base_url('auth/registration') ?>">Sign in</a>
+              <a class="js-scroll-trigger btn btn-sm btn-dark text-Capitalize" href="<?php echo base_url('auth/login') ?>">Sign in</a>
             </li>
           </ul>
         </div>

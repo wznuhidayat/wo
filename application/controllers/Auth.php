@@ -9,7 +9,7 @@ class Auth extends CI_Controller{
         $this->load->library('form_validation');
     }
 	public function login(){
-		check_already_login();
+		
 		$this->template->load('template-auth','auth/login');
 
 	}
@@ -29,27 +29,32 @@ class Auth extends CI_Controller{
 	}
 	public function process(){
 		$post = $this->input->post(null,TRUE);
-		if(isset($post['login'])){
+		if(isset($post['loginUser'])){
 			$query = $this->m_user->login($post);
 			if($query->num_rows()>0){
 				$row = $query->row();
 				$params = array(
-					'email_user' => $row->email_user,
+					'email' => $row->email,
 					'name' => $row->name,
-					'role' => $row->role
+					'img' => $row->img
 				);
 				$this->session->set_userdata($params);
 				echo "<script>
 					alert('Wellcome, Login Success');
-					window.location='".site_url('admin/dashboard')."';
+					window.location='".site_url('main')."';
 				</script>";
 			}else{
 				echo "<script>alert(' Login failed');
-					window.location='".site_url('admin/login')."';
+					window.location='".site_url('auth/login')."';
 				</script>";
 			}
 		}
 
+	}
+	public function logoutUser(){
+		$params = array('email','name','img');
+		$this->session->unset_userdata($params);
+		redirect('auth/login');
 	}
 	public function logout(){
 		$params = array('username','name');

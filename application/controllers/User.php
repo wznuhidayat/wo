@@ -1,87 +1,78 @@
 <?php 
 
-
 class User extends CI_Controller{
-    function __construct(){
+
+    public function __construct()
+    {
         parent::__construct();
         check_not_login();
-        $this->load->helper('url');
+        $this->load->model('m_user');
         $this->load->library('form_validation');
     }
-	public function index(){
-		check_not_login();
-		// $this->load->model('m_user');
-		$data['user'] = $this->m_user->get();
-		$this->template->load('template','user/user_data',$data);
-	}
-	public function add(){
-		
-        $this->form_validation->set_rules('fullname', 'name', 'required');
-        $this->form_validation->set_rules('password', 'password', 'required|min_length[8]');
-        $this->form_validation->set_rules('passconf', 'password confir', 'required|matches[password]',array('required' => ' %s tidak sesuai.'));
-        $this->form_validation->set_rules('phone', 'phone', 'required');
-        $this->form_validation->set_rules('address', 'address', 'required');
 
-        $this->form_validation->set_error_delimiters('<span class="help-block">','</span>');
-           if ($this->form_validation->run() == FALSE)
-                {
-                    $this->template->load('template','user/add_data');    
-                }
-                else
-                {
-                    $post = $this->input->post(null, TRUE);
-                    $this->m_user->add($post);
-                    if($this->db->affected_rows() > 0){
-                        $this->session->set_flashdata('success', 'Data Successfully Added');
-                    }
-                    redirect('user');
-                }
-		
-	}
-    public function del(){
-        $where = $this->input->post('email');
-        $this->m_user->delete($where);
-        if($this->db->affected_rows() > 0){
-           $this->session->set_flashdata('deleted', 'deleted successfully');
-        }
-        redirect('user/index');
+    public function index()
+    {
+        $data['user'] = $this->m_user->getAll();
+        $this->template->load('template','user/user_view',$data);
     }
-    public function edit($email){
-        
-        $this->form_validation->set_rules('fullname', 'name', 'required');
-        if($this->input->post('password')){
-        $this->form_validation->set_rules('password', 'password', 'min_length[8]');
-        $this->form_validation->set_rules('passconf', 'password confir', 'matches[password]',array('required' => ' %s tidak sesuai.'));
+
+
+    public function add()
+    {
+        $user = $this->m_user;
+        $validation = $this->form_validation;
+        $validation->set_rules($user->rules_add());
+
+        if ($validation->run()) {
+            $user->save();
+            $this->session->set_flashdata('success', 'Data Successfully Added');
+            redirect('user');
         }
-        if($this->input->post('passconf')){
+
+        $this->template->load('template','user/add_user');
+    }
+
+    public function edit($email = null)
+    {
+        if (!isset($email)) redirect('user');
        
-        $this->form_validation->set_rules('passconf', 'password confir', 'matches[password]',array('required' => ' %s tidak sesuai.'));
-        }
-        $this->form_validation->set_rules('phone', 'phone', 'required');
-        $this->form_validation->set_rules('address', 'address', 'required');
+        $user = $this->m_user;
+        $validation = $this->form_validation;
+        $validation->set_rules($user->rules_edit());
 
-        $this->form_validation->set_error_delimiters('<span class="help-block">','</span>');
-           if ($this->form_validation->run() == FALSE)
-                {
-                    $query = $this->m_user->get($email);
-                    if($query->num_rows() > 0){
-                        $data['user'] = $query->row();
-                        $this->template->load('template','user/edit_data',$data);
-                    }else{
-                        $this->session->set_flashdata('success', 'Data Successfully Added');
-                        redirect('user');
-                    }
-                        
-                }
-                else
-                {
-                    $post = $this->input->post(null, TRUE);
-                    $this->m_user->edit($post);
-                    if($this->db->affected_rows() > 0){
-                       $this->session->set_flashdata('success', 'Data Successfully Added');
-                    }
-                    redirect('user');
-                }
+        if ($validation->run()) {
+            $user->update();
+            if($this->db->affected_rows() > 0){
+            $this->session->set_flashdata('success', 'Data Successfully Added');
+            }
+            redirect('user');
+        }
+
+        $data['user'] = $user->getById($email);
+        if (!$data['user']) show_404();
         
+        $this->template->load('template','user/edit_user',$data);
     }
+
+    public function delete($email=null)
+    {
+        if (!isset($email)) show_404();
+        if ($this->m_user->delete($email)) {
+            if($this->db->affected_rows() > 0){
+                $this->session->set_flashdata('deleted', 'Deleted Successfully');
+            }
+            redirect(site_url('user'));
+        }
+    }
+    function email_check(){
+        $post = $this->input->post();
+        $query = $this->db->query("SELECT * FROM t_user WHERE email = '$post[email]' AND email != '$post[email]'");
+        if ($query->num_rows() > 0){
+                $this->form_validation->set_message('email_check', '{field} not allowed');
+                return FALSE;
+            }else{
+                return TRUE;
+                }
+    }
+
 }

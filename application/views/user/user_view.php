@@ -33,23 +33,20 @@
                     </thead>
                     <tbody>
                     <?php 
-                    foreach($user->result() as $u => $data): ?>
+                    foreach($user as $u => $data): ?>
                         <tr>
-                            <td><?php echo $data->img ?></td>
+                            <td>
+                                <img src="<?php echo base_url('upload/user/').$data->img ?>" alt="" width="64" >
+                            </td>
                             <td><?php echo $data->name ?></td>
                             <td><?php echo $data->email ?></td>
                             <td><?php echo $data->phone ?></td>
                             <td><?php echo $data->gender ?></td>
                             <td><?php echo $data->address ?></td>
                             <td class="text-center">
-                                <form action="<?= site_url('user/del') ?>" method="post" >
-                                    <a ><?php echo anchor('user/edit/'.$data->email, '<div class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></div>') ?>
+                                <a ><?php echo anchor('user/edit/'.$data->email, '<div class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></div>') ?>
                                     </a>
-                                    <input type="hidden" name="email" value="<?= $data->email ?>" >
-                                    <button onclick="javascript: return confirm('are you sure to delete this data?')" class="btn btn-danger btn-xs">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                </form>
+                                <a href="<?= site_url('user/delete/'.$data->email) ?>" onclick="javascript: return confirm('are you sure to delete this data?')"  class="btn btn-xs btn-danger"  ><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

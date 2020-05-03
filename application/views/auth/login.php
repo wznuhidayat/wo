@@ -32,7 +32,7 @@
 			    </div>
 
 			    <!-- Sign in button -->
-			    <button class="btn btn-danger btn-block my-4" name="login" type="submit">Sign in</button>
+			    <button class="btn btn-danger btn-block my-4" name="loginUser" type="submit">Sign in</button>
 
 			    <!-- Register -->
 			    <p>Not a member?

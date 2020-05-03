@@ -9,7 +9,7 @@ class Funct{
 
 	}
 	function user_login(){
-		$email_user = $this->ci->session->userdata('email_user');
+		$email_user = $this->ci->session->userdata('email');
 		$user_data = $this->ci->m_user->get($email_user)->row();
 		return $user_data;
 	}
