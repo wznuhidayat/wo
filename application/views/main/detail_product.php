@@ -1,7 +1,7 @@
 <section id="product">
 	<div class="container">
 		<div class="row">
-		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 mt-3">
 			                <!-- Product Slider -->
                   <div class="product-gallery">
                     <div class="quickview-slider-active">
@@ -64,27 +64,11 @@
 											</div>
 										</div>
 									</div>
-                                    <div class="quantity">
-										<!-- Input Order -->
-										<div class="input-group">
-											<div class="button minus">
-												<button type="button" class="btn btn-primary btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-													<i class="ti-minus"></i>
-												</button>
-											</div>
-											<input type="text" name="quant[1]" class="input-number"  data-min="1" data-max="1000" value="1">
-											<div class="button plus">
-												<button type="button" class="btn btn-primary btn-number" data-type="plus" data-field="quant[1]">
-													<i class="ti-plus"></i>
-												</button>
-											</div>
-										</div>
-										<!--/ End Input Order -->
-									</div>
+                                    
 									<div class="add-to-cart">
 										<a href="#" class="btn">Add to cart</a>
-										<a href="#" class="btn min"><i class="ti-heart"></i></a>
-										<a href="#" class="btn min"><i class="fa fa-compress"></i></a>
+										<a href="#" class="btn checkout">Checkout</i></a>
+										
 									</div>
                                     <div class="default-social">
 										<h4 class="share-now">Share:</h4>
