@@ -1,12 +1,14 @@
 <section id="product">
 	<div class="container">
+   
 		<div class="row">
+    <?php foreach ($product as $p => $data){ ?>
 		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 mt-3">
 			                <!-- Product Slider -->
                   <div class="product-gallery">
                     <div class="quickview-slider-active">
                       <div class="single-slider">
-                        <img src="https://via.placeholder.com/569x528" alt="#">
+                        <img src="<?php echo base_url("upload/products/").$data->img ?>" alt="#">
                       </div>
                       <div class="single-slider">
                         <img src="https://via.placeholder.com/569x528" alt="#">
@@ -21,8 +23,10 @@
                   </div>
 		</div>
 		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+      
                                 <div class="quickview-content">
-                                    <h2>Flared Shift Dress</h2>
+                                    <h3><?= $data->vendor_name ?></h3>
+                                    <h2><?= $data->name ?></h2>
                                     <div class="quickview-ratting-review">
                                         <div class="quickview-ratting-wrap">
                                             <div class="quickview-ratting">
@@ -38,9 +42,9 @@
                                             <span><i class="fa fa-check-circle-o"></i> in stock</span>
                                         </div>
                                     </div>
-                                    <h3>$29.00</h3>
+                                    <h3>Rp. <?= number_format($data->price,0,',','.') ?></h3>
                                     <div class="quickview-peragraph">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia iste laborum ad impedit pariatur esse optio tempora sint ullam autem deleniti nam in quos qui nemo ipsum numquam.</p>
+                                        <p><?= $data->detail ?></p>
                                     </div>
 									<div class="size">
 										<div class="row">
@@ -82,6 +86,7 @@
                                 </div>
                             </div>
                         </div>
+                     <?php } ?>
             </div>
 	</div>
 </section>

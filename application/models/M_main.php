@@ -1,8 +1,8 @@
 <?php 
 
 class M_main extends CI_Model{
-	private $_table = "p_tenda";
-
+	private $tables = array('p_tenda','p_kuade','p_makeup','p_photo','p_dress','p_kursi','t_sound','p_gedung','p_catering','p_transport');
+	private $kodes = array('kode_tenda','kode_kuade','kode_makeup','kode_photograp','kode_dress','kode_kursi','sound_id','kode_gedung','kode_catering','kode_transport');
 	public function getAllProducts(){
 
 		// $this->db->select($this->_table.".*, p_dress.name as vendor_name");
@@ -12,33 +12,48 @@ class M_main extends CI_Model{
         return $query->result();
 	}
 	public function getProductById($id){
-
-		$tables = array('p_tenda','p_kuade','p_makeup','p_photo','p_dress','p_kursi','t_sound','p_gedung','p_catering','p_transport');
-		$kodes = array('kode_tenda','kode_kuade','kode_makeukode','kode_kodehoto','kode_dress','kode_kursi','sound_id','kode_gedung','kode_catering','kode_transport');
 		$i;
-		for ($i=0; $i < 11 ; $i++) { 
-			return $this->db->get_where($tables[$i], [".$kodes[$i]." => $id])->row();
+
+		for ($i=0; $i < count($this->tables) ; $i++) {
+			$this->db->select($this->tables[$i].".*, t_vendor.name as vendor_name");
+			$query = $this->db->join("t_vendor", "t_vendor.id_vendor = ".$this->tables[$i].".id_vendor")->get_where($this->tables[$i], [$this->kodes[$i] => $id])->result();
+			if($query != NULL){
+				return $query;	
+			}
 		}
 	 	
 	}
-	// public function validate_product($post)
-	// {
-	// 	$this->load->library('form_validation');
-	// 	$this->form_validation->set_rules('product_name', 'Product Name', 'required|is_unique[products.name]|min_length[3]');
-	// 	if($this->form_validation->run() === FALSE)
-	// 	{
-	// 		return FALSE;
-	// 	}
-	// 	else
-	// 	{
-	// 		return TRUE;
-	// 	}
-	// }
-	// public function insert_wishlist($product_id)
-	// {
-	// 	$query = "INSERT INTO wishlist(id_wishlist,kode_product,qty, email, updated_at)
-	// 			  VALUES (?,?,?,?,NOW())";
-	// 	$values = array($product_id,$this->session->userdata('email'));
-	// 	$this->db->query($query,$values);
-	// }
+	public function getVendorById($id){
+		return $this->db->get_where('t_vendor', array("id_vendor" => $id))->result();
+	}
+
+	public function insert_wishlist($product_id)
+	{
+		$id_wishlist = floor(microtime(true));
+		$query = "INSERT INTO t_wishlist(id_wishlist,kode_product, email,updated_at)
+				  VALUES ('$id_wishlist',?,?,NOW())";
+		$values = array($product_id,$this->session->userdata('email'));
+		$this->db->query($query,$values);
+	}
+	public function get_wishlist_user(){
+		$email = $this->session->userdata('email');
+		$i;
+		$data = array();
+		$gtw = $this->db->get_where("t_wishlist", [ 'email'=> $email])->result_array();
+		for ($i=0; $i <= count($gtw) ; $i++) {
+			$this->db->select("t_wishlist .*, ".$this->tables[$i].".name as name ,".$this->tables[$i].".price as price ,".$this->tables[$i].".img as img ");
+			$this->db->join($this->tables[$i], $this->tables[$i].".".$this->kodes[$i]." = 
+				t_wishlist.kode_product");
+			$query = $this->db->get_where("t_wishlist", [ 'email'=> $email])->row();
+			if ($query != NULL) {
+				array_push($data, $query);
+			}
+				
+		}
+		return $data;
+		// return $this->db->get_where('t_wishlist', ['email' => $email])->result_array();
+	}
+	public function remove_wishlist($id){
+		return $this->db->delete('t_wishlist', array("id_wishlist" => $id));
+	}
 }

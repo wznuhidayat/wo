@@ -7,7 +7,10 @@
     <!-- Bootstrap CSS -->
     <!-- <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/bootstrap/css/bootstrap.min.css" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-   
+    <!-- fullcalendar -->
+    <link rel="stylesheet" href="<?= base_url() ?>assets/adminlte/bower_components/fullcalendar/dist/fullcalendar.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/adminlte/bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print">
+
     <!-- <link rel="stylesheet" href="<?= base_url() ?>assets/css/reset.css" crossorigin="anonymous"> -->
     <!-- <link rel="stylesheet" href="<?= base_url() ?>assets/css/responsive.css" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/themify-icons/themify-icons.css" crossorigin="anonymous">
@@ -40,7 +43,7 @@
                   <div class="dropdown-cart-header" id="countrow">
                     
                   </div>
-                  <ul class="shopping-list" id="detail_cart">
+                  <ul class="shopping-list" id="detail_wishlist">
                     <!-- <li>
                       <a href="#" class="remove" title="Remove this item"><i class="fa fa-trash"></i></a>
                       <a class="cart-img" href="#"><img src="https://via.placeholder.com/70x70" alt="#"></a>
@@ -226,25 +229,8 @@
     </div>
 
     <!-- modal schadule -->
-    <div class="modal fade" id="btnSchedule" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div id="calendar"></div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    
+
     
     <!-- Footer -->
     <!-- <script type="text/JavaScript" src="<?= base_url() ?>/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"  crossorigin="anonymous"></script> -->
@@ -274,29 +260,44 @@
    
     <script type="text/JavaScript" src="<?= base_url() ?>assets/vendor/owl-carousel/owl-carousel.js"  crossorigin="anonymous"></script>
     <script type="text/JavaScript" src="<?= base_url() ?>assets/vendor/jquery/jquery-3.4.1.js"  crossorigin="anonymous"></script>
-    
+    <!-- <script src="<?= base_url() ?>assets/adminlte/bower_components/fullcalendar/dist/fullcalendar.min.js"></script> -->
     <script type="text/javascript">
-    $(document).ready(function(){
-      
-       
-        // Load shopping cart
-        
- 
-        
-        $('.button-head .add_cart').click(function(){
-            var kode    = $(this).data("produkid");
-            var name  = $(this).data("produknama");
-            var price = $(this).data("produkharga");
-
+      function show_wishlist(){
             $.ajax({
-                url : "<?php echo base_url();?>/main/addToCart",
+                type  : 'ajax',
+                url   : '<?php echo site_url('main/show_wishlist')?>',
+                dataType : 'json',
+                success : function(data){
+                    var html = '';
+                    for(var i=0; i<data.length; i++){
+                      html += '<li>'+
+                      '<a href="#" class="remove" id="'+data[i].id_wishlist+'" title="Remove this item"><i class="fa fa-trash"></i></a>'+
+                      '<a class="cart-img" href="#"><img src="https://via.placeholder.com/70x70" alt="#"></a>'+
+                      '<h4><a href="#">'+data[i].name+'</a></h4>'+
+                      '<p class="quantity">1x - <span class="amount">'+data[i].name+'</span></p>'+
+                      '</li>';
+                    }
+                    $('#detail_wishlist').html(html);
+                }
+               
+            });
+        }
+      show_wishlist();
+    $(document).ready(function(){
+        
+       
+        // WISHLIST
+        
+        $('.button-head .add_wishlist').click(function(){
+            var kode    = $(this).data("produkid");
+            $.ajax({
+                url : "<?php echo base_url();?>/main/add_wishlist",
                 method : "POST",
-                data : {kode: kode, name: name, price: price},
+                data : {kode: kode},
                 success: function(data){
                     $('#countrow').load("<?php echo base_url();?>main/countrow");
-                    $('#detail_cart').html(data);
+                    show_wishlist();
                     $('#counttotal').load("<?php echo base_url();?>main/countTotal");
-                    
                 },
                error: function(jqxhr, status, exception) {
                    alert('Exception:', exception);
@@ -304,20 +305,20 @@
             });
         });
         
-        $('#detail_cart').load("<?php echo base_url();?>main/load_cart");
+        
         $('#counttotal').load("<?php echo base_url();?>main/countTotal");
-        $('#countrow').load("<?php echo base_url();?>main/countItems");
+        
 
         //remove
         $(document).on('click','.remove',function(){
-          var row_id=$(this).attr("id"); //mengambil row_id dari artibut id
+          var kode=$(this).attr("id"); //mengambil kode dari artibut id
           $.ajax({
-            url : "<?php echo base_url();?>main/removeCart",
+            url : "<?php echo base_url();?>main/remove_from_wishlist",
             method : "POST",
-            data : {row_id : row_id},
+            data : {kode : kode},
             success :function(data){
-              $('#countrow').load("<?php echo base_url();?>main/countrow");
-              $('#detail_cart').html(data);
+              // $('#countrow').load("<?php echo base_url();?>main/countrow");
+              show_wishlist();
               $('#counttotal').load("<?php echo base_url();?>main/countTotal");
               
             }
@@ -335,7 +336,9 @@
             $('#desc').text(detail);
             $('#productimage').attr('src',"<?php echo base_url("upload/products/") ?>" + img);
         });
-    });
+        
+
+   });
 
 
 

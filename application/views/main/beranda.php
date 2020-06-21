@@ -61,8 +61,8 @@
                   <div class="button-head">
                     <div class="product-action">
                       <a class="quickview"data-toggle="modal" data-target="#exampleModal" title="Quick View"  data-produkid="<?php echo $data->kode;?>" data-produknama="<?php echo $data->name;?>" data-produkharga="<?php echo $data->price;?>"data-produkdesc="<?php echo $data->detail;?>" data-produkimg="<?php echo $data->img;?>"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-                      <a title="Schedule" data-toggle="modal" data-target="#btnSchedule"><i class=" ti-calendar "></i><span>Check Schedule</span></a>
-                      <a title="Cart" class="add_cart" data-produkid="<?php echo $data->kode;?>" data-produknama="<?php echo $data->name;?>" data-produkharga="<?php echo $data->price;?>"><i class="ti-shopping-cart" ></i><span>Add to Cart</span></a>
+                      <a title="Schedule"><i class=" ti-calendar "></i><span>Check Schedule</span></a> 
+                      <a title="wishlist" class="add_wishlist" data-produkid="<?php echo $data->kode;?>"><i class="ti-shopping-cart" ></i><span>Add to wishlist</span></a>
                     </div>
                     <div class="product-action-2">
                       <a title="Add to cart" href="#">Add to cart</a>

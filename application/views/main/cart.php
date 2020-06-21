@@ -16,7 +16,7 @@
 								<th class="text-center"><i class="ti-trash remove-icon"></i></th>
 							</tr>
 						</thead>
-						
+						<?= var_dump($this->cart->contents()) ?>
 						<tbody>
 							<?php foreach ($this->cart->contents() as $items) : ?>
 							<tr>

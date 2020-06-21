@@ -2,14 +2,15 @@
 	<div class="container">
 		<div class="col-md-12 shadow-sm border pb-4">
           <!-- Widget: user widget style 1 -->
+          <?php foreach ($vendor as $p => $data){ ?>
           <div class="box box-widget widget-user">
             <!-- Add the bg color to the header using any of the bg-* classes -->
             <div class="widget-user-header bg-black" style="background: url('<?= base_url() ?>/upload/vendor/photo1.png') center center;">
-              <h3 class="widget-user-username text-white ">Elizabeth Pierce</h3>
+              <h3 class="widget-user-username text-white "><?= $data->name ?></h3>
               
             </div>
             <div class="widget-user-image">
-              <img class="img-circle" src="<?= base_url() ?>upload/vendor/default.jpg" alt="User Avatar">
+              <img class="img-circle" src="<?= base_url('upload/vendor/').$data->img ?>" alt="User Avatar">
             </div>
             <div class="box-footer">
               <div class="row">
@@ -42,6 +43,7 @@
             </div>
           </div>
           <!-- /.widget-user -->
+          <?php } ?>
         </div>
         <!-- /.col -->
       </div>
