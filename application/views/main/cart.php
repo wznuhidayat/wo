@@ -11,20 +11,19 @@
 								<th>PRODUCT</th>
 								<th>NAME</th>
 								<th class="text-center">UNIT PRICE</th>
-								<th class="text-center">QUANTITY</th>
 								<th class="text-center">TOTAL</th> 
 								<th class="text-center"><i class="ti-trash remove-icon"></i></th>
 							</tr>
 						</thead>
-						<?= var_dump($this->cart->contents()) ?>
+						
 						<tbody>
-							<?php foreach ($this->cart->contents() as $items) : ?>
+							<?php foreach ($product as $items) : ?>
 							<tr>
 								<td class="image" data-title="No"><img src="https://via.placeholder.com/100x100" alt="#"></td>
 								<td class="product-des" data-title="Description">
-									<p class="product-name"><a href="#"><?= $items['name'] ?></a></p>
+									<p class="product-name"><a href="#"><?= $items->name ?></a></p>
 								</td>
-								<td class="price" data-title="Price"><span>Rp. <?= number_format($items['price'],0,',','.') ?></span></td>
+								<td class="price" data-title="Price"><span>Rp. <?= number_format($items->price,0,',','.') ?></span></td>
 								<td class="qty" data-title="Qty"><!-- Input Order -->
 									<div class="input-group">
 										<div class="button minus">
@@ -32,7 +31,7 @@
 												<i class="ti-minus"></i>
 											</button>
 										</div>
-										<input type="text" name="quant[1]" class="input-number"  data-min="1" data-max="100" value="<?= $items['qty'] ?>">
+										<!-- <input type="text" name="quant[1]" class="input-number"  data-min="1" data-max="100" value="<?= $items->qty ?>"> -->
 										<div class="button plus">
 											<button type="button" class="btn btn-primary btn-number" data-type="plus" data-field="quant[1]">
 												<i class="ti-plus"></i>
@@ -41,8 +40,8 @@
 									</div>
 									<!--/ End Input Order -->
 								</td>
-								<td class="total-amount" data-title="Total"><span>Rp. <?= number_format($items['subtotal'],0,',','.') ?></span></td>
-								<td class="action" data-title="Remove"><a href="<?= base_url('main/removeItem/'.$items['rowid']) ?>"><i class="ti-trash remove-icon"></i></a></td>
+								<!-- 	 -->
+								<td class="action" data-title="Remove"><a href="<?= base_url('main/removeItem/'.$items->id_wishlist) ?>"><i class="ti-trash remove-icon"></i></a></td>
 							</tr>
 							<?php endforeach; ?>
 						</tbody>

@@ -42,13 +42,7 @@
                                     <?= form_error('price') ?>
                                 </div>             
                             </div>
-                            <div class="form-group <?= form_error('discount') ? 'is-invalid':'' ?>">
-                                <label for="discount">Discount</label>
-                                <input type="text" class="form-control" value="<?= $tenda->discount ?>" id="discount" placeholder="discount" name="discount">
-                                <div class="invalid-feedback">
-                                    <?= form_error('discount') ?>
-                                </div>             
-                            </div>
+                            
                             <div class="form-group <?= form_error('image') ? 'is-invalid':'' ?>">
                                 <label for="image">Image</label>
                                 <input type="file" class="form-control-file" id="image" name="image">

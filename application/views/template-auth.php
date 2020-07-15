@@ -33,7 +33,7 @@
               <input class="form-control mr-sm-2 my-sm-0" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
             </form> -->
-            <?php if($this->session->userdata('email') != NULL){ ?>
+            <?php if($this->funct->user_login() != NULL){ ?>
             <li class="dropdown notifications-menu mr-3">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="fa fa-cart-plus fa-2x"></i>
@@ -62,14 +62,14 @@
                       <span>Total</span>
                       <span class="total-amount">$134.00</span>
                     </div>
-                    <a href="checkout.html" class="btn animate">Checkout</a>
+                    <a href="<?= base_url('main/cart') ?>" class="btn animate">Checkout</a>
                   </div>
                 </div>
             </li>
             
             <li class="dropdown user user-menu" >
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="<?= base_url('upload/admin/').$this->funct->admin_login()->img ?>" class="user-image" alt="User Image" >
+                  <img src="<?= base_url('upload/user/').$this->funct->user_login()->img ?>" class="user-image" alt="User Image" >
                   <span class="hidden-xs"><?= $this->funct->user_login()->name  ?></span>
                 </a>
                 <ul class="dropdown-menu">
@@ -84,7 +84,27 @@
                 </ul>
               </li>
             <?php  } ?>
+            <?php if($this->funct->vendor_login() != NULL){ ?>
+           
             
+            <li class="dropdown user user-menu" >
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img src="<?= base_url('upload/user/').$this->funct->vendor_login()->img ?>" class="user-image" alt="User Image" >
+                  <span class="hidden-xs"><a href="<?= base_url('main/profilevendor/').$this->session->userdata('id_vendor') ?>"><?= $this->funct->vendor_login()->name  ?></a></span>
+                </a>
+                <ul class="dropdown-menu">
+                 <div class="list-group">
+                    <a href="<?= base_url('main/profile/').$this->session->userdata('id_vendor') ?>" class="list-group-item list-group-item-action">
+                      Profile
+                    </a>
+                    <a href="<?= base_url('main/add_product') ?>" class="list-group-item list-group-item-action">add product</a>
+                    <a href="#" class="list-group-item list-group-item-action">Schedule</a>
+                    <a href="#" class="list-group-item list-group-item-action">Setting</a>
+                    <a href="<?php echo site_url('auth/logoutVendor') ?>" class="list-group-item list-group-item-action"><i class="pull-right fa fa-sign-out mt-1"></i>Logout</a>
+                  </div>
+                </ul>
+              </li>
+            <?php  } ?>
           </ul>
         </div>
       </div>
@@ -269,12 +289,13 @@
                 dataType : 'json',
                 success : function(data){
                     var html = '';
+                    var base_url = "<?php echo base_url('upload/products/');?>";
                     for(var i=0; i<data.length; i++){
                       html += '<li>'+
                       '<a href="#" class="remove" id="'+data[i].id_wishlist+'" title="Remove this item"><i class="fa fa-trash"></i></a>'+
-                      '<a class="cart-img" href="#"><img src="https://via.placeholder.com/70x70" alt="#"></a>'+
+                      '<a class="cart-img" href="#"><img src="'+base_url+data[i].img+'" alt="#"></a>'+
                       '<h4><a href="#">'+data[i].name+'</a></h4>'+
-                      '<p class="quantity">1x - <span class="amount">'+data[i].name+'</span></p>'+
+                      '<p class="quantity">1x - <span class="amount">'+data[i].price+'</span></p>'+
                       '</li>';
                     }
                     $('#detail_wishlist').html(html);
@@ -339,7 +360,7 @@
         
 
    });
-
+    
 
 
 </script>

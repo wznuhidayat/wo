@@ -43,19 +43,28 @@ class M_transport extends CI_Model{
         $this->db->join("t_vendor", "t_vendor.id_vendor = ".$this->_table.".id_vendor");
         return $this->db->get()->result();
     }
-    
+    public function getByVendor($id)
+    {
+        $this->db->select($this->_table.".* ");
+        return $this->db->get_where($this->_table, [ 'id_vendor' => $id])->result();
+        
+    }
     public function getById($id)
     {
         return $this->db->get_where($this->_table, ["kode_transport" => $id])->row();
     }
 
-    public function save()
+    public function save($ven = null)
     {
         $post = $this->input->post();
         $kode = 'TR';
         $this->kode_transport = $kode.floor(microtime(true)*321);
         $this->name = $post["name"];
-        $this->id_vendor = $post["id_vendor"];
+        if ($ven != null) {
+            $this->id_vendor = $ven;
+        }else{
+            $this->id_vendor = $post["id_vendor"];
+        }
         $this->price = $post["price"];
         $this->category = $post["category"];
         $this->detail = $post["detail"];

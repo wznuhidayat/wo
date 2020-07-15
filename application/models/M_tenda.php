@@ -7,7 +7,6 @@ class M_tenda extends CI_Model{
     public $name;
     public $id_vendor;
     public $price;
-    public $discount;
     public $detail;
     public $img = "default.jpg";
    
@@ -46,16 +45,24 @@ class M_tenda extends CI_Model{
     {
         return $this->db->get_where($this->_table, ["kode_tenda" => $id])->row();
     }
-
-    public function save()
+    public function getByVendor($id)
+    {
+        $this->db->select($this->_table.".* ");
+        return $this->db->get_where($this->_table, [ 'id_vendor' => $id])->result();
+        
+    }
+    public function save($ven = null)
     {
     	$kode = 'TE';
         $post = $this->input->post();
         $this->kode_tenda = $kode.floor(microtime(true) * 231);
         $this->name = $post["name"];
-        $this->id_vendor = $post["id_vendor"];
+        if ($ven != null) {
+            $this->id_vendor = $ven;
+        }else{
+            $this->id_vendor = $post["id_vendor"];
+        }
         $this->price = $post["price"];
-        $this->discount = $post["discount"];
         $this->detail = $post["detail"];
         $this->img = $this->_uploadImage();
 
@@ -69,7 +76,6 @@ class M_tenda extends CI_Model{
         $this->name = $post["name"];
         $this->id_vendor = $post["id_vendor"];
         $this->price = $post["price"];
-        $this->discount = $post["discount"];
         $this->detail = $post["detail"];
         if (!empty($_FILES["image"]["name"])) {
             $this->img = $this->_uploadImage();

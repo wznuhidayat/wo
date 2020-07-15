@@ -48,14 +48,23 @@ class M_gedung extends CI_Model{
     {
         return $this->db->get_where($this->_table, ["kode_gedung" => $id])->row();
     }
-
-    public function save()
+    public function getByVendor($id)
+    {
+        $this->db->select($this->_table.".* ");
+        return $this->db->get_where($this->_table, [ 'id_vendor' => $id])->result();
+        
+    }
+    public function save($ven = null)
     {
         $post = $this->input->post();
         $kode = 'GD';
         $this->kode_gedung = $kode.floor(microtime(true)*321);
         $this->name = $post["name"];
-        $this->id_vendor = $post["id_vendor"];
+        if ($ven != null) {
+            $this->id_vendor = $ven;
+        }else{
+            $this->id_vendor = $post["id_vendor"];
+        }
         $this->price = $post["price"];
         $this->category = $post["category"];
         $this->detail = $post["detail"];

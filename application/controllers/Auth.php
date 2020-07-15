@@ -5,7 +5,7 @@ class Auth extends CI_Controller{
     {
         parent::__construct();
         // check_not_login();
-        $this->load->model('m_user');
+        $this->load->model(['m_user','m_vendor']);
         $this->load->library('form_validation');
     }
 	public function login(){
@@ -18,14 +18,38 @@ class Auth extends CI_Controller{
 		$user = $this->m_user;
         $validation = $this->form_validation;
         $validation->set_rules($user->rules_add());
-
+        $post = $this->input->post();
         if ($validation->run()) {
-            $user->save();
-            $this->session->set_flashdata('success', 'Data Successfully Added');
+            $user->saveUser();
+            $params = array(
+					'email' => $post["email"],
+					'name' => $post["nameFirst"]." ".$post["nameSecond"],
+				);
+			$this->session->set_userdata($params);
             redirect('main');
         }
 
         $this->template->load('template-auth','auth/registration');
+	}
+	public function loginVendor(){
+		$this->template->load('template-auth','auth/login-vendor');
+	}
+	public function vendorRegistration(){
+		$vendor = $this->m_vendor;
+        $validation = $this->form_validation;
+        $validation->set_rules($vendor->rules_vendor());
+
+        if ($validation->run()) {
+            $vendor->saveVendor();
+            $params = array(
+					'email' => $post["email"],
+					'name' => $post["nameFirst"]." ".$post["nameSecond"],
+				);
+			$this->session->set_userdata($params);
+            redirect('main');
+        }
+
+        $this->template->load('template-auth','auth/vendor-registration');
 	}
 	public function process(){
 		$post = $this->input->post(null,TRUE);
@@ -44,9 +68,32 @@ class Auth extends CI_Controller{
 					window.location='".site_url('main')."';
 				</script>";
 			}else{
-				echo "<script>alert(' Login failed');
-					window.location='".site_url('auth/login')."';
+				 $this->session->set_flashdata('login-failed', 'Your email or password is inccorect');
+				 redirect('auth/login');
+			}
+		}
+
+	}
+	public function processV(){
+		$post = $this->input->post(null,TRUE);
+		if(isset($post['loginVendor'])){
+			$query = $this->m_vendor->login($post);
+			if($query->num_rows()>0){
+				$row = $query->row();
+				$params = array(
+					'id_vendor' => $row->id_vendor,
+					'email' => $row->email,
+					'name' => $row->name,
+					'img' => $row->img
+				);
+				$this->session->set_userdata($params);
+				echo "<script>
+					alert('Wellcome, Login Success');
+					window.location='".site_url('main')."';
 				</script>";
+			}else{
+				 $this->session->set_flashdata('login-failed', 'Your email or password is inccorect');
+				 redirect('auth/loginVendor');
 			}
 		}
 
@@ -55,6 +102,11 @@ class Auth extends CI_Controller{
 		$params = array('email','name','img');
 		$this->session->unset_userdata($params);
 		redirect('auth/login');
+	}
+	public function logoutVendor(){
+		$params = array('id_vendor','email','name','img');
+		$this->session->unset_userdata($params);
+		redirect('auth/loginVendor');
 	}
 	public function logout(){
 		$params = array('username','name');

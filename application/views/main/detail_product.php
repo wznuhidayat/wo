@@ -2,6 +2,7 @@
 	<div class="container">
    
 		<div class="row">
+    <?php echo var_dump($product); ?>
     <?php foreach ($product as $p => $data){ ?>
 		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 mt-3">
 			                <!-- Product Slider -->
@@ -25,7 +26,7 @@
 		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
       
                                 <div class="quickview-content">
-                                    <h3><?= $data->vendor_name ?></h3>
+                                    <h3><a href="<?= base_url('main/profilevendor/').$data->id_vendor ?>"><?= $data->vendor_name ?></a></h3>
                                     <h2><?= $data->name ?></h2>
                                     <div class="quickview-ratting-review">
                                         <div class="quickview-ratting-wrap">

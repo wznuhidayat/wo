@@ -70,7 +70,24 @@ class M_vendor extends CI_Model{
             'rules' => 'required']
         ];
     }
+    public function rules_vendor()
+    {
+        
+        return [
 
+            ['field' => 'email',
+            'label' => 'email',
+            'rules' => 'required|valid_email|is_unique[t_vendor.email]'],
+
+            ['field' => 'password',
+            'label' => 'password',
+            'rules' => 'required|min_length[8]'],
+
+            ['field' => 'passconf',
+            'label' => 'pass confir',
+            'rules' => 'required|matches[password]'],
+        ];
+    }
 
     public function getAll()
     {
@@ -94,7 +111,14 @@ class M_vendor extends CI_Model{
         $this->img = $this->_uploadImage();
         $this->db->insert($this->_table, $this);
     }
-
+    public function login($post){
+        $this->db->select('*');
+        $this->db->from('t_vendor');
+        $this->db->where('email', $post['email']);
+        $this->db->where('password', md5($post['password']));
+        $query = $this->db->get();
+        return $query;
+    }
     public function update()
     {
         $post = $this->input->post();
@@ -144,5 +168,14 @@ class M_vendor extends CI_Model{
             $filename = explode(".", $vendor->img)[0];
             return array_map('unlink', glob(FCPATH."upload/vendor/$filename.*"));
         }
+    }
+    public function saveVendor(){
+        $post = $this->input->post();
+        $this->id_vendor = floor(microtime(true));
+        $this->name = $post["nameFirst"]." ".$post["nameSecond"];
+        $this->email = $post["email"];
+        $this->password = md5($post["password"]);
+        $this->img = $this->_uploadImage();
+        $this->db->insert($this->_table, $this);
     }
 }

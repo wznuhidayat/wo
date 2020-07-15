@@ -48,21 +48,42 @@ class M_dress extends CI_Model{
     {
         return $this->db->get_where($this->_table, ["kode_dress" => $id])->row();
     }
-
-    public function save()
+    public function getByVendor($id)
+    {
+        $this->db->select($this->_table.".* ");
+        return $this->db->get_where($this->_table, [ 'id_vendor' => $id])->result();
+        
+    }
+    public function save($ven = null)
     {
         $post = $this->input->post();
         $kode = 'DR';
         $this->kode_dress = $kode.floor(microtime(true)*321);
         $this->name = $post["name"];
-        $this->id_vendor = $post["id_vendor"];
+        if ($ven != null) {
+            $this->id_vendor = $ven;
+        }else{
+            $this->id_vendor = $post["id_vendor"];
+        }
         $this->price = $post["price"];
         $this->type = $post["type"];
         $this->detail = $post["detail"];
         $this->img = $this->_uploadImage();
         $this->db->insert($this->_table, $this);
     }
-
+    public function saveProduct($ven)
+    {
+        $post = $this->input->post();
+        $kode = 'DR';
+        $this->kode_dress = $kode.floor(microtime(true)*321);
+        $this->name = $post["name"];
+        $this->id_vendor = $ven;
+        $this->price = $post["price"];
+        $this->type = $post["type"];
+        $this->detail = $post["detail"];
+        $this->img = $this->_uploadImage();
+        $this->db->insert($this->_table, $this);
+    }
     public function update()
     {
         $post = $this->input->post();

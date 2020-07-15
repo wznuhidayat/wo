@@ -44,7 +44,7 @@
                             <td><?php echo $data->name ?></td>
                             <td><?php echo $data->vendor_name ?></td>
                             <td><?php echo $data->price ?></td>
-                            <td><?php echo $data->discount ?></td>
+                            
                             <td><?php echo $data->detail ?></td>
                             <td class="text-center">                    
                                     <a ><?php echo anchor('products/tenda/edit/'.$data->kode_tenda, '<div class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></div>') ?>

@@ -10,7 +10,12 @@ class Funct{
 	}
 	function user_login(){
 		$email_user = $this->ci->session->userdata('email');
-		$user_data = $this->ci->m_user->get($email_user)->row();
+		$user_data = $this->ci->m_user->getById($email_user);
+		return $user_data;
+	}
+	function vendor_login(){
+		$id = $this->ci->session->userdata('id_vendor');
+		$user_data = $this->ci->m_vendor->getById($id);
 		return $user_data;
 	}
 	function admin_login(){

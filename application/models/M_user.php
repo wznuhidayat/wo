@@ -35,15 +35,12 @@ class M_user extends CI_Model{
     {
         
         return [
-            
-        	
             ['field' => 'email',
             'label' => 'email',
-            'rules' => 'required|valid_email|callback_email_check'],
-
-            
+            'rules' => 'required|valid_email|callback_email_check'],  
         ];
     }
+    
     public function getAll()
     {
         return $this->db->get($this->_table)->result();
@@ -56,7 +53,7 @@ class M_user extends CI_Model{
     {
         $post = $this->input->post();
         
-        $this->name = $post["nameFirst"] + $post["nameSecond"];
+        $this->name = $post["nameFirst"]." ".$post["nameSecond"];
         $this->email = $post["email"];
         $this->password = md5($post["password"]);
         $this->phone = $post["phone"];
@@ -65,7 +62,19 @@ class M_user extends CI_Model{
         $this->img = $this->_uploadImage();
         $this->db->insert($this->_table, $this);
     }
-
+    public function saveUser()
+    {
+        $post = $this->input->post();
+        
+        $this->name = $post["nameFirst"]." ".$post["nameSecond"];
+        $this->email = $post["email"];
+        $this->password = md5($post["password"]);
+        $this->phone = NULL;
+        $this->address = NuLL;
+        $this->gender = null;
+        $this->img = $this->_uploadImage();
+        $this->db->insert($this->_table, $this);
+    }
 	public function login($post){
 		$this->db->select('*');
 		$this->db->from('t_user');
@@ -74,14 +83,14 @@ class M_user extends CI_Model{
 		$query = $this->db->get();
 		return $query;
 	}
-	public function get($email = null){
-		$this->db->from('t_user');
-		if($email != null){
-			$this->db->where('email',$email);
-		}
-		$query = $this->db->get();
-		return $query;
-	}
+	// public function get($email = null){
+	// 	$this->db->from('t_user');
+	// 	if($email != null){
+	// 		$this->db->where('email',$email);
+	// 	}
+	// 	$query = $this->db->get();
+	// 	return $query;
+	// }
 	public function add($post){
 		$params['name'] = $post['fullname'];
 		$params['email'] = $post['email'];
